@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+title: >-
+  Consciousness for Eternity (CoE): A Substrate-Brane Framework
+  for Consciousness, Time, and Cosmology
+message: >-
+  If you reference or build on this work, please cite it using the
+  metadata below.
+type: dataset
+authors:
+  - given-names: Pitarn
+    family-names: Rungsiyapornratana
+version: "2.23"
+date-released: "2026-07-04"
+license: CC-BY-4.0
+url: "https://github.com/wow116sk-collab/Consciousness-for-Eternity"
+repository-code: "https://github.com/wow116sk-collab/Consciousness-for-Eternity"
+keywords:
+  - consciousness
+  - philosophy of mind
+  - metaphysics
+  - block universe
+  - eternalism
+  - philosophy of time
+  - cosmology
+  - brane cosmology
+  - personal identity
+  - mind uploading
+  - quantum information
+  - integrated information theory
+  - filter theory of mind
+  - near-death experience
+  - thermodynamics of death
+abstract: >-
+  A working metaphysical framework that treats consciousness as a passive
+  cross-slice reader within a block universe hosted by a pre-geometric
+  substrate, integrating relativity, quantum-information no-go theorems,
+  the filter/transmission theory of mind, and cyclic cosmology. Every
+  claim is tagged by epistemic status ([Fact] / [Fact-eq] / [Hypo]) with
+  sources; where the framework's conclusions are independently reached by
+  published researchers they are cited for priority, not confirmation.
+  Presented as a self-aware lens, not a falsified theory.
+# --- Zenodo DOI (concept DOI — resolves to the latest version) ---
+doi: "10.5281/zenodo.21156743"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.21156743"
+    description: Concept DOI (resolves to the latest version)

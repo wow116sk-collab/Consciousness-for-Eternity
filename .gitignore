@@ -1,0 +1,28 @@
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Editors / IDEs ---
+.vscode/
+.idea/
+*.swp
+*~
+
+# --- Python (version-edit / build scripts) ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# --- Generated reading views ---
+# The .md file is the single source of truth; HTML/PDF views are regenerated
+# from it. Keep them out of version control by default:
+/rendered/
+# Uncomment if you also generate these at the repo root and don't want them tracked:
+# *.html
+# *.pdf
+
+# --- Local scratch ---
+*.tmp
+*.bak
