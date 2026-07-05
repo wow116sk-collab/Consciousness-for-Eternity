@@ -9,8 +9,8 @@ type: dataset
 authors:
   - given-names: Pitarn
     family-names: Rungsiyapornratana
-version: "2.23"
-date-released: "2026-07-04"
+version: "2.24"
+date-released: "2026-07-05"
 license: CC-BY-4.0
 url: "https://github.com/wow116sk-collab/Consciousness-for-Eternity"
 repository-code: "https://github.com/wow116sk-collab/Consciousness-for-Eternity"

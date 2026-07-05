@@ -72,7 +72,7 @@ Section numbering is sequential and gap-free, and every `§N.M` cross-reference 
 
 ## Versioning — what to update on a release
 
-Version tags are **not monotonic by history** (the scheme restarted once: true order is V1 → V2 → V3 → V1.4 → … → V2.23). The **canonical version is the top line of the `.md`** (currently V2.23); future revisions continue monotonically from there (next = V2.24). The leading digit is held at `2` so point-releases never collide with the legacy coarse `V3` content-generation tag.
+Version tags are **not monotonic by history** (the scheme restarted once: true order is V1 → V2 → V3 → V1.4 → … → V2.23). The **canonical version is the top line of the `.md`** (currently V2.24); future revisions continue monotonically from there (next = V2.25). The leading digit is held at `2` so point-releases never collide with the legacy coarse `V3` content-generation tag.
 
 When bumping the version, update **all of these together** so they never disagree:
 
