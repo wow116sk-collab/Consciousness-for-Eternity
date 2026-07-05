@@ -12,7 +12,7 @@ The author is Pitarn Rungsiyapornratana. The work is archived on Zenodo (concept
 
 `Consciousness_for_Eternity.md` (~1340 lines) is the **canonical document**. Everything else is derived from it or describes it:
 
-- `Consciousness_for_Eternity_v2.23.pdf` — a generated reading view. It is committed at the repo root (the `.gitignore` `/rendered/` rule and commented-out `*.pdf` rule anticipate a future move to a generated-only workflow, but the current PDF is tracked and named with its version).
+- `Consciousness_for_Eternity_v2.24.pdf` — a generated reading view. It is committed at the repo root (the `.gitignore` `/rendered/` rule and commented-out `*.pdf` rule anticipate a future move to a generated-only workflow, but the current PDF is tracked and named with its version).
 - `README.md`, `CITATION.cff`, `.zenodo.json` — metadata *about* the document (title, version, DOI, keywords, license).
 - `CONNECTION_MAP.md` — a cross-document index tying CoE to three sibling frameworks (see below).
 
