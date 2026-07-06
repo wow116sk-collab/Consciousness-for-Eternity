@@ -19,6 +19,7 @@ not an *answer* (❌) — answers come only from the `[Fact]` wall.
 |------|------------|
 | [`index.html`](index.html) | Landing page linking everything below |
 | [`tier01-cause-analysis.html`](tier01-cause-analysis.html) | **Tier 0+1 Cause Analysis** — 10 phenomena walked case-by-case: the 8-ingredient "cause recipe", the 2-layer rule, and a discriminating test for each |
+| [`tier2-cause-analysis.html`](tier2-cause-analysis.html) | **Tier 2 Cause Analysis (lab psi)** — the 6 phenomena that *do* have lab data + meta-analyses: Ganzfeld telepathy, micro-PK/RNG, remote viewing, precognition/presentiment (Bem 2011), DMILS/remote staring, and the Global Consciousness Project. Same cause-recipe + 2-layer treatment |
 | [`deep-dossier.html`](deep-dossier.html) | **Deep Evidence Dossier** — 31 phenomena: primary studies, replications, null results, live controversies |
 | [`evidence-map.html`](evidence-map.html) | **Evidence Map** — 27 phenomena across 6 groups / 5 types / 10 shared threads; similarities & differences at a glance |
 | [`experience-ledger.html`](experience-ledger.html) | **Experience Ledger** — a blank template (experience → reference class → verdict) with the embedded **2-layer rule** (Pattern① vs Meaning/Knowledge②) and its research citations |
