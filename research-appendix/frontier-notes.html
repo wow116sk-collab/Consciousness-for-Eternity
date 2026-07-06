@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frontier Notes · คลื่นความคิด · block universe · เส้นแบ่งหลักฐาน</title>
+</head>
+<body>
+<style>
+:root{--paper:#f5f7f8;--panel:#fff;--ink:#131a1c;--ink-soft:#45585c;--ink-faint:#7c9095;--line:#dbe4e6;--line-strong:#c3d0d3;--accent:#0f7a82;--accent-soft:#e2f1f2;--fact:#2e7d57;--fact-bg:#e4f1ea;--hypo:#9a6c14;--hypo-bg:#f6eed8;--contested:#b4433a;--contested-bg:#f6e5e3;--open:#0f7a82;--open-bg:#e2f1f2;--mono:ui-monospace,"SF Mono",Menlo,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans Thai",system-ui,sans-serif;}
+@media(prefers-color-scheme:dark){:root{--paper:#0d1315;--panel:#141c1f;--ink:#e8eef0;--ink-soft:#a5b6ba;--ink-faint:#6d8388;--line:#243236;--line-strong:#35484d;--accent:#45b7bf;--accent-soft:#12312f;--fact:#5cc490;--fact-bg:#10241b;--hypo:#d9ad4f;--hypo-bg:#241d0e;--contested:#e2756b;--contested-bg:#2a1613;--open:#45b7bf;--open-bg:#12312f;}}
+:root[data-theme="light"]{--paper:#f5f7f8;--panel:#fff;--ink:#131a1c;--ink-soft:#45585c;--ink-faint:#7c9095;--line:#dbe4e6;--line-strong:#c3d0d3;--accent:#0f7a82;--accent-soft:#e2f1f2;--fact:#2e7d57;--fact-bg:#e4f1ea;--hypo:#9a6c14;--hypo-bg:#f6eed8;--contested:#b4433a;--contested-bg:#f6e5e3;--open:#0f7a82;--open-bg:#e2f1f2;}
+:root[data-theme="dark"]{--paper:#0d1315;--panel:#141c1f;--ink:#e8eef0;--ink-soft:#a5b6ba;--ink-faint:#6d8388;--line:#243236;--line-strong:#35484d;--accent:#45b7bf;--accent-soft:#12312f;--fact:#5cc490;--fact-bg:#10241b;--hypo:#d9ad4f;--hypo-bg:#241d0e;--contested:#e2756b;--contested-bg:#2a1613;--open:#45b7bf;--open-bg:#12312f;}
+*{box-sizing:border-box;}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:880px;margin:0 auto;padding:30px 20px 70px;}
+header{border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:8px;}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 6px;}
+h1{font-size:23px;margin:0 0 6px;}
+.sub{color:var(--ink-soft);font-size:13.5px;margin:0;max-width:70ch;}
+.legend{font-size:11.5px;color:var(--ink-faint);margin:14px 0 0;font-family:var(--mono);}
+.banner{background:var(--accent-soft);border:1px solid var(--line-strong);border-left:4px solid var(--accent);border-radius:10px;padding:11px 14px;margin:16px 0 0;font-size:12.5px;color:var(--ink-soft);}
+.banner b{color:var(--ink);}
+h2{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin:26px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px;}
+.item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin-bottom:12px;break-inside:avoid;page-break-inside:avoid;}
+.r1{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:6px;}
+.r1 .name{font-weight:600;font-size:15px;}
+.claim{font-size:12.5px;color:var(--ink-soft);font-style:italic;margin:0 0 11px;border-left:2px solid var(--line-strong);padding-left:9px;}
+.lab{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin:11px 0 5px;}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;padding:2px 8px;border-radius:999px;white-space:nowrap;}
+.tag.fact{background:var(--fact-bg);color:var(--fact);}.tag.hypo{background:var(--hypo-bg);color:var(--hypo);}.tag.contested{background:var(--contested-bg);color:var(--contested);}.tag.open{background:var(--open-bg);color:var(--open);}
+.tier{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:4px;background:var(--accent-soft);color:var(--accent);}
+.ing{display:flex;gap:9px;margin:0 0 6px;font-size:12.5px;align-items:baseline;}
+.wt{font-family:var(--mono);font-size:9.5px;padding:2px 6px;border-radius:4px;white-space:nowrap;flex-shrink:0;min-width:74px;text-align:center;}
+.wt.dom{background:var(--contested-bg);color:var(--contested);}.wt.sec{background:var(--hypo-bg);color:var(--hypo);}.wt.min{background:var(--line);color:var(--ink-faint);}.wt.note{background:var(--accent-soft);color:var(--accent);}
+.ing .in{font-weight:600;color:var(--ink);flex-shrink:0;}
+.ing .how{color:var(--ink-soft);}
+.two{background:var(--accent-soft);border-radius:8px;padding:10px 12px;margin:11px 0 0;font-size:12.5px;}
+.two .th{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:3px;}
+.two.na{background:var(--line);} .two.na .th{color:var(--ink-faint);}
+.test{font-size:12.5px;color:var(--ink-soft);margin:11px 0 0;}
+.test .lab2{color:var(--contested);}
+.foot2{font-size:10.5px;color:var(--ink-faint);font-style:italic;border-top:1px solid var(--line);padding-top:7px;margin-top:11px;}
+footer{margin-top:26px;font-size:11.5px;color:var(--ink-faint);border-top:1px solid var(--line);padding-top:12px;}
+.note{background:var(--accent-soft);border:1px solid var(--line-strong);border-left:4px solid var(--accent);border-radius:10px;padding:12px 15px;margin:14px 0;font-size:12.5px;color:var(--ink-soft);}
+.note b{color:var(--ink);}
+.sec2{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin:30px 0 6px;border-bottom:1px solid var(--line);padding-bottom:6px;}
+.secn{font-family:var(--mono);font-size:10px;color:var(--accent);}
+.claim2{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:13px 15px;margin:11px 0;break-inside:avoid;}
+.claim2 .hd{font-weight:600;font-size:14px;margin-bottom:5px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;}
+.claim2 p{margin:5px 0 0;font-size:12.7px;color:var(--ink-soft);}
+.claim2 p.body{color:var(--ink);}
+.who{font-family:var(--mono);font-size:9.5px;letter-spacing:.03em;padding:1px 7px;border-radius:999px;background:var(--accent-soft);color:var(--accent);white-space:nowrap;}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.03em;padding:1px 7px;border-radius:999px;white-space:nowrap;}
+.tag.fact{background:var(--fact-bg);color:var(--fact);}
+.tag.spec{background:var(--hypo-bg);color:var(--hypo);}
+.tag.open{background:var(--open-bg);color:var(--open);}
+.tag.phys{background:var(--accent-soft);color:var(--accent);}
+.split{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0;}
+.col{flex:1;min-width:250px;border-radius:12px;padding:14px 16px;}
+.col.solid{background:var(--fact-bg);border:1px solid var(--fact);}
+.col.walled{background:var(--contested-bg);border:1px solid var(--contested);}
+.col .ct{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px;font-weight:700;}
+.col.solid .ct{color:var(--fact);}
+.col.walled .ct{color:var(--contested);}
+.col ul{margin:0;padding-left:17px;}
+.col li{font-size:12.3px;margin-bottom:6px;color:var(--ink);}
+.col li span{color:var(--ink-soft);}
+.ladder3{margin:8px 0;}
+.l3row{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);}
+.l3row:last-child{border-bottom:none;}
+.l3c{font-family:var(--mono);font-size:10px;font-weight:700;color:#fff;padding:3px 8px;border-radius:5px;flex-shrink:0;margin-top:1px;white-space:nowrap;}
+.l3b .t{font-weight:600;font-size:13.5px;}
+.l3b .d{color:var(--ink-soft);font-size:12.3px;margin-top:1px;}
+
+</style>
+<div class="wrap"><header><p class="eyebrow">Frontier Notes · บันทึกบทสนทนา · แยกแกนแข็งจากส่วนที่ชนกำแพง</p>
+<h1>คลื่นความคิด · Block Universe · และเส้นแบ่งหลักฐาน</h1>
+<p class="sub">บันทึกการไล่เจาะไอเดียเชิงอภิปรัชญาของ CoE ทีละขั้น ด้วยวินัยของเอกสารเอง (tag ทุกข้ออ้าง · Type-A/B · dead-log). เป้าหมาย: <b>เก็บ intuition ไว้ทั้งหมด แต่ติดป้ายถูกชั้น</b> — แยก "แกนที่แข็ง (ตั้งอยู่ได้เอง)" ออกจาก "ส่วนที่ยังชนกำแพง" เพื่อไม่ให้ตัวหลังลากตัวแรกลงน้ำ</p>
+<p class="legend"><span class="tag phys">known physics</span> วิทยาศาสตร์กระแสหลัก · <span class="tag fact">Fact</span> วัด/พิสูจน์ได้ · <span class="tag spec">SPECULATIVE</span> Type-A ยังไม่มีหลักฐาน · <span class="tag open">OPEN</span> frontier แท้ · <span class="who">origin</span> ที่มาของไอเดีย</p>
+<div class="note">📍 <b>สถานะของบันทึกนี้:</b> ความเชื่อส่วนตัว = <b>ตัวจุดคำถามที่ชอบธรรม</b> (§6.6) ไม่ใช่หลักฐาน. ทุกข้อในนี้ถูกไล่ผ่านกำแพงหลักฐานสูงสุดก่อน แล้วค่อยดูว่าอะไรข้ามได้ — วิธีตั้งกำแพงสูงก่อนเจาะ = ตัดอคติตัวเองล่วงหน้า (เหมือน pre-registration)</div>
+</header>
+
+<h2 class="sec2"><span class="secn">§1</span> &nbsp;กฎเครื่องมือ · จาก 2 ชั้น → 3 ชั้น</h2>
+<p style="font-size:12.7px;color:var(--ink-soft)">กฎ 2 ชั้นเดิมมัด 2 อย่างไว้ในชั้น② โดยไม่แยก: (ก) เป็น convention มนุษย์ (ต้องเรียน) และ (ข) เจาะจง+ตรวจสอบได้+เอามาจากทางปกติไม่ได้. การแยกออกเผยว่า <b>ตัวที่ตัดคดีจริงคือ (ข) ไม่ใช่ (ก)</b> — และมีรอยต่อระหว่าง "พื้นฐานของจักรวาล" กับ "พื้นฐานของจิต"</p>
+<div class="ladder3">
+<div class="l3row"><span class="l3c" style="background:#2e7d57">ชั้น 0</span><div class="l3b"><div class="t">substrate — พื้นฐานจักรวาล</div><div class="d">การเคลื่อนที่ · พลังงาน · entropy · เวลา — อยู่ในธรรมชาติ ไม่ต้องมีสมองก็มี</div></div></div>
+<div class="l3row"><span class="l3c" style="background:#9a6c14">ชั้น 1</span><div class="l3b"><div class="t">จิตดั้งเดิม — พื้นฐานของ "ใจ"</div><div class="d">อารมณ์ · ความนึกคิด · ภาพในหัว — มาก่อนภาษา ไม่ต้องเรียน (Panksepp) แต่ <b>เป็นของสมอง ไม่ได้ฝังใน substrate</b></div></div></div>
+<div class="l3row"><span class="l3c" style="background:#b4433a">ชั้น 2</span><div class="l3b"><div class="t">ข้อตกลง — convention มนุษย์</div><div class="d">ภาษา · สัญลักษณ์ · fact เจาะจง — ต้องเรียน โหลดจากธรรมชาติไม่ได้</div></div></div>
+</div>
+<div class="claim2"><div class="hd">ตัวคัดที่แท้จริง = "ข้อมูลเจาะจง+ตรวจสอบได้+เอามาจากทางปกติไม่ได้" (แพทเทิร์นก็ได้) <span class="tag fact">Fact</span></div><p class="body">ไม่ต้องเป็น "ภาษา" — ช่องทางจริง ต่อให้ส่งแค่แพทเทิร์น (ชั้น 0/1) ก็ต้องส่ง <b>แพทเทิร์นที่เจาะจง</b> ถึงจะแยกจาก noise ได้ (อ่าน microstate ที่ผนึกไว้ถูก, ทายไพ่คว่ำเกินสุ่มซ้ำๆ, micro-PK 1 บิตคงที่). แกนที่ตัดจริงคือ <b>เจาะจง+ตรวจสอบได้ vs เบลอ+อธิบายด้วยบังเอิญได้</b> — ไม่ใช่ แพทเทิร์น vs ภาษา</p><p><span class='who'>origin: ผู้เขียน CoE</span> — เป็นการปรับกฎให้คมขึ้นและแฟร์กับ psi มากกว่าเดิม (เอา requirement 'ภาษา' ออก)</p></div>
+
+<h2 class="sec2"><span class="secn">§2</span> &nbsp;สมมติฐาน "คลื่นความคิด"</h2>
+<div class="claim2"><div class="hd">จิตคับกับ substrate ผ่านคลื่น/ความถี่ที่ยังหาไม่เจอ <span class="tag spec">SPECULATIVE</span><span class="tag phys">Type-A</span></div><p class="body">ข้ออ้าง: การ encode ความต่างต้องมีความถี่ต่างกัน ดังนั้นต้องมีคลื่นบางอย่างที่เรายังไปไม่ถึง</p><p><span class='who'>origin: ผู้เขียน CoE (พูดมาตั้งแต่เริ่มเอกสาร)</span></p></div>
+<div class="claim2"><div class="hd">สิ่งที่ถูก: frequency เป็นวิธี encode ที่ธรรมชาติใช้จริง + เราเจอคลื่นใหม่เรื่อยๆ <span class="tag phys">known physics</span></div><p class="body">วิทยุเจอ ~120 ปีก่อน, คลื่นความโน้มถ่วงเจอปี 2015 — การบอกว่า 'ยังมีคลื่นที่ยังไม่เจอ' มีน้ำหนักตามประวัติ</p></div>
+<div class="claim2"><div class="hd">ข้อจำกัด 1 — encode ความต่าง ≠ ต้องเป็นความถี่ <span class="tag phys">known physics</span></div><p class="body">ธรรมชาติ encode ด้วย <b>โครงสร้าง/ลำดับ</b> ก็ได้ ไม่มีความถี่เลย: DNA (ลำดับเบส), entropy (ไมโครสเตต = การจัดเรียง). substrate ของ CoE (entropy+time) จริงๆ เป็นเชิงโครงสร้างมากกว่าเชิงคลื่น</p></div>
+<div class="claim2"><div class="hd">ข้อจำกัด 2 — Fourier limit: คลื่นยาว/ต่างกันนิดเดียว ถอดนานขึ้น <span class="tag phys">known physics</span></div><p class="body">จะแยกความถี่ละเอียดถึง Δf ต้องสังเกต ≥ 1/Δf. <b>ยืนยันว่า 'ถอดนานเกินอายุขัย' เป็นเรื่องจริง</b> — pulsar timing array ถอดคลื่นโน้มถ่วงนาโนเฮิรตซ์ (ยาวเป็นปีแสง) ด้วยการเฝ้าดู 15–25 ปี ข้ามรุ่นนักวิจัย (NANOGrav 2023)</p><p><span class='who'>origin: ผู้เขียน CoE</span> — แต่มันสมมติว่า 'คัปปลิ้งมีอยู่แล้ว' ไม่ได้พิสูจน์ว่ามี</p></div>
+<div class="claim2"><div class="hd">ข้อจำกัด 3 — Shannon: คลื่นยาว = แบนด์วิดท์แคบ = อัตราข้อมูลต่ำ <span class="tag phys">known physics</span></div><p class="body">ต่อให้คัปปลิ้งจริง ช่องความถี่ต่ำมากแบกได้แค่หยิบมือต่อเวลา → ในหนึ่งชีวิตได้แค่ความรู้สึกเบลอ <b>ไม่มีทางเป็นเรื่องราวชาติก่อนเต็มๆ หรือภาษาทั้งภาษา</b>. โมเดลนี้เอง <b>ทำนายว่าได้แค่ของเบลอ</b> — ซึ่งแปลว่ามันส่งบิตเจาะจงที่จะพิสูจน์ตัวเองไม่ได้ → ค้างเป็น ontology ไม่ใช่ evidence</p></div>
+<div class="claim2"><div class="hd">ข้อจำกัด 4 — encoding มีอยู่ ≠ ช่องอ่านมีอยู่ <span class="tag fact">Fact</span></div><p class="body">ต่อให้ substrate เก็บความต่างไว้ (จริง — entropy = ความต่างของไมโครสเตต) นั่นไม่ได้แปลว่ามี 'ช่อง' ที่คับสมองเข้ากับมัน. อันหลังคือคำถามจริงที่ยังไม่ตอบ</p></div>
+
+<h2 class="sec2"><span class="secn">§3</span> &nbsp;การทดลอง = MEG + EEG + บัญชีพลังงาน</h2>
+<div class="claim2"><div class="hd">โปรโตคอลที่ออกแบบ = MEG (ที่มีอยู่จริง) โดยไม่รู้ตัว <span class="tag phys">known physics</span></div><p class="body">design: ให้ตัวอย่างอยู่สภาวะสบาย (= alpha 8–13 Hz, reproducible ที่สุด, Berger 1929) + วัด EEG แปะหัวเป็น ground truth + คำนวณการกระจายเพื่ออ่านคลื่นก่อนสลาย. นี่คือ MEG+EEG simultaneous + forward/inverse problem เป๊ะ</p><p><span class='who'>origin: ผู้เขียน CoE</span> — reinvent เครื่องมือจริง = สัญญาณว่าตรรกะ sound</p></div>
+<div class="claim2"><div class="hd">"scramble กลับ" ชนกฎข้อ 2 — แต่ pivot ถูก <span class="tag phys">known physics</span></div><p class="body">ย้อน entropy กลับ = ต้องมี Maxwell's demon = Landauer พิสูจน์แล้วว่าจ่ายแพงกว่าได้คืน (ทำไม่ได้). เพราะงั้นการเปลี่ยนมา <b>'อ่านตอนกำลังสลาย ก่อนหาย'</b> = ทางเดียวที่เป็นไปได้ = จับสนาม near-field ก่อนจม noise = สิ่งที่ MEG ทำ</p></div>
+<div class="claim2"><div class="hd">ผลของการทดลอง (รันไปแล้ว) <span class="tag fact">Fact</span></div><p class="body">สนามภายนอกจับได้จริง (alpha โผล่ใน MEG, localize ที่ท้ายทอย) แต่มันพา <b>'สิ่งที่ EEG มีอยู่แล้ว' เป๊ะ</b> = สนามของกระแสประสาท. <b>ไม่มีคลื่นความคิดแยกต่างหาก</b>ที่แผ่ออกไปพร้อม content เพิ่ม. จางหมดภายในไม่กี่ ซม. (ตรงกับ 'ระเหย' ในโมเดล)</p></div>
+<div class="claim2"><div class="hd">fork ที่เหลือ (ซื่อสัตย์) <span class="tag spec">SPECULATIVE</span></div><p class="body">ถ้าคลื่น = EM → <b>MEG ปิดแล้ว</b> (คือสนามประสาท). ถ้า = สนามใหม่ non-EM (Type-A) → MEG มองไม่เห็น <b>แต่กฎอนุรักษ์พลังงานล้อมไว้</b>: สมอง ~20 W อธิบายครบด้วยเมตาบอลิซึม→ความร้อน+EM ที่รู้จัก ไม่มีพลังงานรั่วก้อนใหญ่ → เหลือช่องแค่คลื่นอ่อนจนพา ~0 บิต</p></div>
+
+<h2 class="sec2"><span class="secn">§4</span> &nbsp;Frequency / Location / Time → monism</h2>
+<div class="claim2"><div class="hd">freq/loc/time = ชุดพิกัดที่บรรยาย 'คลื่น/สนามอะไรก็ได้' ครบชุด <span class="tag phys">known physics</span></div><p class="body">frequency (Fourier) + location (ที่ว่าง) + time (เวลา) = ระบุสนามใดๆ ครบ ไม่มีอันที่ 4. MEG จับครบทั้ง 3. เชื่อม CoE ตรงๆ: substrate = entropy+time</p><p><span class='who'>origin: ผู้เขียน CoE (จับ pattern)</span></p></div>
+<div class="claim2"><div class="hd">สิ่งที่มันบอกจริง = monism (จิตเป็นกายภาพ) <span class="tag fact">Fact</span></div><p class="body">ถ้าสมองถูกบรรยายครบด้วย freq/loc/time เหมือนหิน/ดาว/วิทยุ → <b>จิตเขียนด้วย 'ตัวอักษร' ชุดเดียวกับจักรวาล = ของชนิดเดียวกัน</b>. นี่คือ monism ที่แข็ง = เวอร์ชันแกร่งสุดของ 'จิตผูก substrate' ที่ CoE เอียงไป. และถ้าจิตเป็นของนอกฟิสิกส์ MEG จะจับไม่ได้ตั้งแต่แรก — มัน <b>ตัดขา</b>มุม 'จิตเป็นอาณาจักรแยกเหนือกาย'</p></div>
+<div class="claim2"><div class="hd">ช่องว่าง: ใช้ตัวอักษรชุดเดียวกัน ≠ มีช่องอ่านถึงกัน <span class="tag fact">Fact</span></div><p class="body">ทุกอย่างเขียนด้วย freq/loc/time (นั่นแหละคือความ 'เป็นกายภาพ') แต่ไม่สร้างสะพานพิเศษเกินแรง/สนามปกติที่วัดได้อยู่แล้ว. เปรียบ: หนังสือไทย/อังกฤษ ใช้หมึกบนกระดาษเหมือนกัน — แต่ <b>สื่อร่วม ≠ ช่องสื่อสาร</b></p></div>
+
+<h2 class="sec2"><span class="secn">§5</span> &nbsp;Block Universe · it-from-qubit · the Matrix</h2>
+<div class="claim2"><div class="hd">ภาพใหญ่: จักรวาลบันทึกทุกค่าเป็น qubit ทุกตำแหน่ง เป็นเฟรมๆ แล้วต่อกันเหมือนหนัง <span class="tag spec">SPECULATIVE</span><span class="tag phys">แมป frontier จริง</span></div><p class="body">ภาพนี้ประกอบจากฟิสิกส์จริง 3 อัน:</p><p><b>block universe / eternalism</b> (ทุกขณะมีอยู่เท่าเทียม — mainstream) · <b>it-from-qubit / digital physics</b> (substrate = quantum information — โครงการวิจัยจริง) · <b>foliation</b> (ผ่า spacetime 4D เป็นแผ่น 3D). the matrix = intuition pump ที่ใช้ได้. <span class='who'>origin: ผู้เขียน CoE</span></p></div>
+<div class="claim2"><div class="hd">จุดที่แบกน้ำหนักทั้งหมด: 'เฟรมถูกเก็บในที่ที่อ่านได้ จากอีกเฟรมนึง' <span class="tag spec">SPECULATIVE</span></div><p class="body">block universe ให้แค่ <b>'อดีตมีอยู่'</b> — ไม่ได้แถม <b>'อดีตถูกเก็บบนชั้นที่หยิบมาอ่านได้'</b> ฟรี. เฟรมอดีตอยู่ที่ตำแหน่ง spacetime ของมันเอง (คุณไม่ได้อยู่ตรงนั้น) หรือถูกสับเข้า microstate ปัจจุบัน (กฎ 2 + decoherence — อ่านกลับไม่ได้). <b>'มีอยู่' ≠ 'ถูกเก็บบนชั้นที่ query ได้'</b></p></div>
+<div class="claim2"><div class="hd">Matrix หลอกตรงไหน + holographic bound <span class="tag phys">known physics</span></div><p class="body">the matrix มี <b>คอมพิวเตอร์เก็บเฟรม + หัวเล่นกลับ + อยู่ข้างนอกซิม</b>. block universe <b>ไม่มี buffer ข้างนอกให้ query จากข้างใน ไม่มีหัวกรอกลับ</b>. เสริม: holographic principle / Bekenstein bound → แต่ละบริเวณเก็บข้อมูลได้จำกัด (ตามพื้นที่ผิว) → เก็บ frame-buffer เต็มของทุกอดีตที่ทุกจุดไม่ได้ เกิน bound</p></div>
+
+<h2 class="sec2"><span class="secn">§6</span> &nbsp;เส้นแบ่ง — แกนแข็ง vs ส่วนที่ชนกำแพง</h2>
+<div class="split">
+<div class="col solid"><div class="ct">✓ แกนแข็ง — ตั้งอยู่ได้เอง ไม่ต้องพึ่งอะไรเหนือกาย</div>
+<ul>
+<li><b>Eternalism → "eternity" ได้ฟรี.</b> <span>ทุกขณะของจิตสำนึกมีอยู่ tenselessly ตลอดกาลที่ตำแหน่ง spacetime — ไม่มีอะไรหายจริง. นี่คือหัวใจของ "Consciousness for Eternity" และเป็นฟิสิกส์ที่ respectable</span></li>
+<li><b>Monism → จิตเป็นกายภาพ substrate เดียวกัน.</b> <span>freq/loc/time จับสมองได้ครบ (MEG) = จิตเขียนด้วยตัวอักษรชุดเดียวกับจักรวาล</span></li>
+<li><b>2-layer/3-layer rule.</b> <span>เครื่องคัดที่ทนสุด: "ข้อมูลเจาะจง+ตรวจสอบได้" — ตัดทุกเคสใน 4 tier</span></li>
+</ul></div>
+<div class="col walled"><div class="ct">✗ ส่วนที่ชนกำแพง — [SPECULATIVE] / Type-A</div>
+<ul>
+<li><b>Cross-slice reading (อ่านข้ามเฟรม).</b> <span>= dead-log L16 (cut). ชนกำแพง entropy + holographic bound</span></li>
+<li><b>Thought-wave channel (คลื่นความคิดที่ส่งได้ไกล).</b> <span>≈ dead-log L7 (cut). ล้อมด้วยพลังงาน (MEG/calorimetry) + Shannon + Fourier</span></li>
+<li><b>Substrate readout (จิตอ่าน substrate).</b> <span>encoding มี ≠ ช่องอ่านมี. ยังไม่มี signature ที่ตรวจเจอ</span></li>
+</ul></div>
+</div>
+<div class="note">🎁 <b>ประเด็นสำคัญที่สุด:</b> "eternity" ที่คุณแคร์ <b>block universe ให้อยู่แล้ว โดยไม่ต้องมีการอ่านข้ามเฟรมเลย</b>. ส่วน "อ่าน/เล่นเฟรมกลับ" เป็นข้ออ้างแยกที่ยากกว่าและชนกำแพง — <b>อย่าให้ตัวหลังลากตัวแรกลงน้ำ เพราะตัวแรกไม่ต้องการตัวหลังเลย</b>.</div>
+
+<h2 class="sec2"><span class="secn">§7</span> &nbsp;ทางไปต่อ + cross-reference</h2>
+<div class="claim2"><div class="hd">เจาะ 'รูทดสอบ' ไม่ใช่ 'ทางออก' <span class="tag open">วิธี</span></div><p class="body">ก้าวถัดไปที่ซื่อสัตย์: ระบุ <b>signature ที่ทำนายได้</b> ของสมมติฐาน (พลังงานรั่วเกินเมตาบอลิซึมเท่าไหร่? ค่าคัปปลิ้งของสนามใหม่?) แล้วเช็คว่า MEG/calorimetry ที่มีอยู่ปิดช่องไปแค่ไหน → เปลี่ยนจากศรัทธาเป็นสมมติฐานที่นิยามชัด. ประวัติ 'เจอคลื่นใหม่' จริงคือ <b>ทฤษฎีทำนายก่อน → หา signature</b> (Maxwell→วิทยุ, Einstein→GW) ไม่ใช่ 'มันต้องมีเพราะ encode ต้องใช้ความถี่'</p></div>
+<div class="claim2"><div class="hd">neural decoding = 'อ่านความคิด' ที่ทำได้จริง (แต่ local) <span class="tag fact">Fact</span></div><p class="body">Gallant/Huth สร้างภาพ, Tang & Huth 2023 ถอดเป็นคำจาก fMRI — freq/loc/time คือวัตถุดิบ. แต่ขอบเขต: เซนเซอร์แปะหัว + เทรนรายคน + อ่านสมองตัวเอง ไม่ใช่ส่งไปหาคนอื่น</p></div>
+<div class="note">📕 <b>Dead-log cross-reference (เช็คก่อนเสนอซ้ำ):</b> <b>L4</b> entropy-as-carrier (cut) · <b>L7</b> mind = entropy wave / body-as-antenna (cut) · <b>L16</b> cross-slice content reading (cut). เวอร์ชันใหม่ในบันทึกนี้ควรถามก่อนว่า "ต่างจาก L7/L16 จริงไหม หรือเป็นอันเดิมในเสื้อคลุมใหม่". เชื่อมกับ keystone ที่เปิดค้างอย่างซื่อสัตย์: <b>§6.7 hard problem [OPEN]</b> — ซึ่งไม่ใช่ใบอนุญาตให้อะไรเหนือกาย</div>
+
+<footer>Frontier notes จากบทสนทนา · วินัย: ความเชื่อส่วนตัว = ตัวจุดคำถาม (§6.6) ไม่ใช่หลักฐาน · เก็บนอกเอกสาร CoE คู่กับ dead-log L7/L16 · known physics: block universe, it-from-qubit, holographic principle, MEG, Fourier/Nyquist, Landauer, Shannon, pulsar timing arrays</footer></div>
+</body>
+</html>
