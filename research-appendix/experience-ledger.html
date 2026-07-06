@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Experience Ledger — ประสบการณ์ → reference class → verdict</title>
+</head>
+<body>
+<style>
+  :root {
+    --paper:#f5f7f8; --panel:#fff; --ink:#131a1c; --ink-soft:#45585c; --ink-faint:#7c9095;
+    --line:#dbe4e6; --line-strong:#c3d0d3; --accent:#0f7a82; --accent-soft:#e2f1f2;
+    --fact:#2e7d57; --fact-bg:#e4f1ea; --hypo:#9a6c14; --hypo-bg:#f6eed8;
+    --contested:#b4433a; --contested-bg:#f6e5e3; --excluded:#5b6b70; --excluded-bg:#e9eef0;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans Thai",system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --paper:#0d1315;--panel:#141c1f;--ink:#e8eef0;--ink-soft:#a5b6ba;--ink-faint:#6d8388;
+    --line:#243236;--line-strong:#35484d;--accent:#45b7bf;--accent-soft:#12312f;
+    --fact:#5cc490;--fact-bg:#10241b;--hypo:#d9ad4f;--hypo-bg:#241d0e;
+    --contested:#e2756b;--contested-bg:#2a1613;--excluded:#8fa0a5;--excluded-bg:#1b2427;
+  }}
+  :root[data-theme="light"]{--paper:#f5f7f8;--panel:#fff;--ink:#131a1c;--ink-soft:#45585c;--ink-faint:#7c9095;--line:#dbe4e6;--line-strong:#c3d0d3;--accent:#0f7a82;--accent-soft:#e2f1f2;--fact:#2e7d57;--fact-bg:#e4f1ea;--hypo:#9a6c14;--hypo-bg:#f6eed8;--contested:#b4433a;--contested-bg:#f6e5e3;--excluded:#5b6b70;--excluded-bg:#e9eef0;}
+  :root[data-theme="dark"]{--paper:#0d1315;--panel:#141c1f;--ink:#e8eef0;--ink-soft:#a5b6ba;--ink-faint:#6d8388;--line:#243236;--line-strong:#35484d;--accent:#45b7bf;--accent-soft:#12312f;--fact:#5cc490;--fact-bg:#10241b;--hypo:#d9ad4f;--hypo-bg:#241d0e;--contested:#e2756b;--contested-bg:#2a1613;--excluded:#8fa0a5;--excluded-bg:#1b2427;}
+
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1000px;margin:0 auto;padding:32px 20px 80px;}
+  header{border-bottom:2px solid var(--ink);padding-bottom:16px;margin-bottom:24px;}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 6px;}
+  h1{font-size:25px;margin:0 0 6px;letter-spacing:-.01em;text-wrap:balance;}
+  .sub{color:var(--ink-soft);font-size:14px;margin:0;max-width:64ch;}
+  h2.sec{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin:28px 0 12px;}
+
+  /* reference-class cards */
+  .refgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:720px){.refgrid{grid-template-columns:1fr;}}
+  .ref{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:14px 15px;}
+  .ref h3{font-size:14px;margin:0 0 3px;}
+  .ref .cat{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 8px;}
+  .ref p{font-size:12.5px;color:var(--ink-soft);margin:0 0 8px;}
+  .ref .cites{font-size:11px;color:var(--ink-faint);font-style:italic;}
+  .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;padding:2px 8px;border-radius:999px;}
+  .tag.fact{background:var(--fact-bg);color:var(--fact);} .tag.hypo{background:var(--hypo-bg);color:var(--hypo);}
+  .tag.contested{background:var(--contested-bg);color:var(--contested);} .tag.excluded{background:var(--excluded-bg);color:var(--excluded);}
+  .tag.open{background:var(--accent-soft);color:var(--accent);}
+  .rule{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:11px;padding:16px 18px;margin:0 0 22px;}
+  .rule h3{font-size:15px;margin:0 0 4px;}
+  .rule .rsub{font-size:12px;color:var(--ink-faint);margin:0 0 12px;}
+  .rule .layer{font-size:13px;margin:0 0 9px;line-height:1.5;}
+  .rule .l1 strong{color:var(--fact);} .rule .l2 strong{color:var(--contested);}
+  .rule .use{font-size:12.5px;color:var(--ink-soft);margin:10px 0 0;padding-top:10px;border-top:1px solid var(--line);}
+  .rule .rcites{font-size:11px;color:var(--ink-faint);font-style:italic;margin-top:8px;line-height:1.5;}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:20px;}
+  .card > .hint{font-size:12.5px;color:var(--ink-faint);margin:0 0 16px;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:13px 16px;}
+  @media(max-width:640px){.grid{grid-template-columns:1fr;}}
+  .field{display:flex;flex-direction:column;gap:5px;} .field.full{grid-column:1/-1;}
+  label{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-soft);}
+  label .req{color:var(--contested);}
+  input,textarea,select{font-family:var(--sans);font-size:14px;color:var(--ink);background:var(--paper);border:1px solid var(--line-strong);border-radius:8px;padding:9px 11px;width:100%;}
+  textarea{resize:vertical;min-height:46px;}
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent);}
+  .actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  button{font-family:var(--sans);font-size:13.5px;font-weight:500;cursor:pointer;border-radius:8px;padding:10px 16px;border:1px solid transparent;}
+  .btn-primary{background:var(--accent);color:#fff;} .btn-primary:hover{filter:brightness(1.07);}
+  .btn-ghost{background:transparent;color:var(--ink-soft);border-color:var(--line-strong);} .btn-ghost:hover{color:var(--ink);border-color:var(--ink-faint);}
+  button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+  .filters{display:flex;gap:6px;flex-wrap:wrap;}
+  .chip{font-family:var(--mono);font-size:11px;letter-spacing:.03em;padding:5px 11px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;color:var(--ink-soft);cursor:pointer;}
+  .chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+  .ledger-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px;flex-wrap:wrap;}
+
+  .group{margin-bottom:18px;}
+  .group-title{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:8px;display:flex;justify-content:space-between;}
+  .exp{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:13px 15px;margin-bottom:8px;}
+  .exp .q{font-weight:500;font-size:14px;margin:0 0 4px;}
+  .exp .raw{font-size:12.5px;color:var(--ink-soft);margin:0 0 8px;}
+  .exp .meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:11px;color:var(--ink-faint);font-family:var(--mono);}
+  .exp .vnote{font-size:12px;color:var(--ink-soft);margin:6px 0 0;}
+  .del{margin-left:auto;font-family:var(--mono);font-size:10.5px;padding:3px 8px;border-radius:6px;border:1px solid var(--line-strong);background:transparent;color:var(--ink-faint);cursor:pointer;}
+  .del:hover{color:var(--contested);border-color:var(--contested);}
+  .empty{padding:32px;text-align:center;color:var(--ink-faint);font-size:13.5px;}
+  footer{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center;}
+  .foot-note{font-size:12px;color:var(--ink-faint);max-width:60ch;}
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Experience → Reference Class → Verdict</p>
+    <h1>Experience Ledger</h1>
+    <p class="sub">ประสบการณ์ส่วนตัวไม่เข้าเอกสาร (§6.6: n=1 retrospective = [Hypo] โดยนิยาม) แต่มันเป็น <em>ตัวจุดคำถาม</em>ที่ชอบธรรม ที่นี่: แต่ละประสบการณ์ถูกจัดกลุ่มตามชนิด → เทียบ reference class (ข้อมูลโลก) → <strong>ให้ข้อมูลเป็นคนแปะแท็ก</strong> ไม่ใช่ความรู้สึก</p>
+  </header>
+
+  <div class="rule">
+    <h3>🔧 กฎเครื่องมือ · 2 ชั้น: แพทเทิร์น vs ข้อตกลง</h3>
+    <p class="rsub">ใช้ตัดสินไอเดีย "โหลด/รับข้อมูลจากธรรมชาติ" ทุกแบบ (savant, filter theory, ปลดล็อกพลังจิต)</p>
+    <p class="layer l1">① <strong>แพทเทิร์น</strong> = อยู่ในธรรมชาติจริง · จับได้เองไม่ต้องเรียน · การกดสมอง/บาดเจ็บ <em>ปลดล็อก</em>ได้ → เช่น เห็นรูปทรง/จังหวะ/สมมาตร/ปริมาณคร่าวๆ, คำนวณแพทเทิร์น</p>
+    <p class="layer l2">② <strong>ความหมาย / ภาษา / ความรู้</strong> = ข้อตกลงของมนุษย์ · <em>ไม่</em>อยู่ในธรรมชาติ · ต้องเรียน · โหลดไม่ได้ → เช่น คำศัพท์, ไวยากรณ์, สัญลักษณ์คณิต, ทฤษฎีบท</p>
+    <p class="use"><strong>วิธีใช้:</strong> อ้างว่า "รับจากธรรมชาติ" → ถ้าได้แค่ <em>ความสามารถ/แพทเทิร์น</em> (①) = ปลดล็อกภายใน = ธรรมดา · ถ้าได้ <em>ความรู้/ภาษาที่เรียนไม่ได้</em> (②) เมื่อไหร่ = ถึงจะเป็น evidence จริง — <b>ซึ่งไม่เคยเกิดสักครั้ง</b> (ไม่มี savant/หัวกระแทกไหนได้ภาษาหรือทฤษฎีบทใหม่)</p>
+    <p class="rcites"><strong>งานวิจัยที่โดนตรง:</strong> เลขตรงเป๊ะ — Approximate Number System (ANS) มีมาแต่เกิด (ทารก/สัตว์ ทุกวัฒนธรรม) = ชั้น① · แต่ <em>ตัวเลขสัญลักษณ์แบบเป๊ะ</em> เป็น "เทคโนโลยีทางความคิด" ที่ต้องเรียน — ชนเผ่า Pirahã ไม่มีคำเลข ทำเลขเป๊ะไม่ได้ (Gordon 2004, Science; Frank et al. 2008, Cognition) = ชั้น② · ทารกดึงแพทเทิร์นเสียงเองไม่ต้องสอน (Saffran, Aslin & Newport 1996, Science) · ความหมายเป็นข้อตกลงที่ต้องผูก/เรียน — arbitrariness of the sign (Saussure); symbol grounding problem (Harnad 1990) · savant = เข้าถึงข้อมูลดิบชั้นล่างที่ปกติถูกกด (Snyder 2009, Phil Trans R Soc B)</p>
+  </div>
+
+  <h2 class="sec">Reference classes — สิ่งที่ข้อมูลโลกบอก (พรีโหลดจากงานวิจัยจริง)</h2>
+  <div class="refgrid" id="refgrid"></div>
+
+  <h2 class="sec">ลงบันทึกประสบการณ์ (เป็นคำถาม ไม่ใช่ข้อสรุป)</h2>
+  <div class="card">
+    <p class="hint">เวลาลงล็อกอัตโนมัติ · แท็ก verdict มาจาก reference class ด้านบน ไม่ใช่จากน้ำหนักที่รู้สึก</p>
+    <form id="form">
+      <div class="grid">
+        <div class="field full"><label>ประสบการณ์ (ดิบ) <span class="req">*</span></label>
+          <textarea id="f-raw" required placeholder="เล่าตามจริง สั้นๆ"></textarea></div>
+        <div class="field full"><label>คำถามที่มันจุด (ไม่ใช่ข้อสรุป) <span class="req">*</span></label>
+          <input id="f-q" required placeholder="เช่น: ปานสัตว์เลี้ยงมาโผล่ในลูกเกินบังเอิญไหม?"></div>
+        <div class="field"><label>กลุ่มปรากฏการณ์ <span class="req">*</span></label>
+          <select id="f-cat" required></select></div>
+        <div class="field"><label>Verdict (ข้อมูลแปะ)</label>
+          <select id="f-tag">
+            <option value="hypo">[Hypo] — tie / ยังไม่ถึงนัย</option>
+            <option value="open">[OPEN] — frontier ยังไม่ปิด</option>
+            <option value="contested">[CONTESTED] — เถียงกัน</option>
+            <option value="fact">[Fact] — กลไกวัดได้</option>
+            <option value="excluded">excluded — ตกเกณฑ์ provenance</option>
+          </select></div>
+        <div class="field"><label>bias ที่ระบุได้</label>
+          <input id="f-bias" placeholder="retrospective, confirmation, base-rate..."></div>
+        <div class="field"><label>ข้อมูลนอกที่เทียบ / โน้ต verdict</label>
+          <input id="f-note" placeholder="เช่น: base-rate 10⁻²–10⁻⁴, n=1"></div>
+      </div>
+      <div class="actions">
+        <button type="submit" class="btn-primary">ลงบันทึก</button>
+        <button type="button" class="btn-ghost" id="btn-sample">ใส่ตัวอย่าง (เคสหมา→ลูก)</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="ledger-head">
+    <h2 class="sec" style="margin:0;">สมุด · จัดกลุ่ม · <span id="count">0</span> รายการ</h2>
+    <div class="filters" id="filters"></div>
+  </div>
+  <div id="groups"></div>
+
+  <footer>
+    <p class="foot-note">Pipeline: ประสบการณ์ = คำถาม ✅ · ประสบการณ์ = คำตอบ ❌ (คำตอบมาจากกำแพง [Fact]) · เก็บนอกเอกสาร ให้ข้อมูลตัดสิน</p>
+    <div class="filters"><button class="btn-ghost" id="btn-export">ส่งออก JSON</button><button class="btn-ghost" id="btn-reset">ล้าง</button></div>
+  </footer>
+</div>
+
+<script>
+const KEY="coe_experience_ledger_v1";
+const CATS={
+  "hard-problem":{name:"Hard problem — ทำไมมี “ความรู้สึก” เลย",tag:"open",
+    world:"ยังไม่มีคำตอบ ไม่มีการทดลองไหนปิดได้ (Chalmers 1995). นี่คือ keystone §6.7 ที่เอกสารเปิดค้างไว้อย่างซื่อสัตย์ — frontier แท้ ไม่ใช่ [Hypo].",
+    cites:"Chalmers 1995; §6.7"},
+  "terminal-lucidity":{name:"Terminal lucidity — สว่างวาบก่อนตาย",tag:"open",
+    world:"ผู้ป่วยสมองเสื่อม/สมองเสียหายกลับมาชัดเจนก่อนตาย — ปรากฏการณ์ *จริง*มีรายงาน แต่กลไก *ยังไม่รู้* → เปิด ไม่ใช่ถูกอธิบายแล้ว.",
+    cites:"Nahm & Greyson 2009/2012"},
+  reincarnation:{name:"Reincarnation / birthmark correspondence",tag:"contested",
+    world:"Stevenson ~2,500 เคส แต่จดก่อนตรวจแค่ 33 (1.3%). Leininger เถียงกัน (Sudduth). ปานทารกไทย: Mongolian spot 66.7% (หลังล่าง 82.6%), CMN 2.4% → เคสเดี่ยว retrospective = coincidence-range. Trace ข้ามภพ = dead-log L4 (cut).",
+    cites:"Stevenson; Tucker; Sudduth; Thai neonate studies"},
+  divination:{name:"Divination / prediction — ทำนาย",tag:"contested",
+    world:"โหราศาสตร์ blind = ระดับเดาสุ่ม (Carlson, Nature 1985). ค่าที่วัดคือ hit–base rate; แม่นระยะใกล้ = ลายเซ็น present-inference; “100% ทั้งปี” = falsify ไม่ได้.",
+    cites:"Carlson 1985 (Nature); Dean & Kelly"},
+  "free-will":{name:"Free will / เจตจำนง",tag:"contested",
+    world:"การตัดสินใจก่อนรู้ตัว (Libet 1983; §2.4); hard determinism (Sapolsky) vs libertarian — physics ไม่ชี้ขาด; “ผู้ตัดสินใจ” map เป็น distributed competition ไม่มี central decider (§9.3.1).",
+    cites:"Libet 1983; Sapolsky; §9.3.1"},
+  telepathy:{name:"Telepathy / ESP (Ganzfeld)",tag:"contested",
+    world:"meta-analysis Ganzfeld เหนือสุ่มจริง: Bem–Honorton 1994 = 32.2% (106/329; สุ่ม 25%), Storm 2010 เหนือสุ่ม — *แต่* Milton–Wiseman 1999 (30 studies) = null 27.6% ทำซ้ำสะอาดไม่ได้ + ข้อโต้ methodology (Hyman). มีสัญญาณ ยังไม่ผ่านบาร์ replication.",
+    cites:"Bem–Honorton 1994; Milton–Wiseman 1999; Storm 2010"},
+  precog:{name:"Precognitive dream — ฝันเห็นอนาคต",tag:"hypo",
+    world:"Bem 2011 (“feeling the future”) ทำซ้ำไม่ได้ (Ritchie–Wiseman–French 2012; Galak 2012). retrospective ไม่มี timestamp = เสมอกับฝัน+เรียบเรียงใหม่+hindsight.",
+    cites:"Bem 2011; Ritchie 2012; Galak 2012"},
+  nde:{name:"NDE / veridical perception",tag:"hypo",
+    world:"visual hidden-target null ตลอด AWARE I/II/IIIa (Parnia; Ross & Parnia 2025). cardiac-arrest ≠ brain-death → self-nullifying.",
+    cites:"Parnia AWARE; Ross & Parnia 2025"},
+  obe:{name:"OBE — ประสบการณ์นอกร่าง",tag:"fact",
+    world:"เหนี่ยวนำได้ด้วยไฟฟ้าที่ temporo-parietal junction (Blanke, Nature 2002; Bos 2016; Penfield) — การรวมสัญญาณ vestibular/multisensory ผิดเพี้ยน. กลไกมี; “ออกจากร่างจริง” contested.",
+    cites:"Blanke 2002 (Nature); Bos 2016"},
+  "sleep-paralysis":{name:"Sleep paralysis / ผีอำ",tag:"fact",
+    world:"REM atonia รุกเข้าช่วงตื่น + ภาพหลอน hypnagogic/hypnopompic (Cheyne; Hufford “Old Hag”). ข้ามวัฒนธรรมเนื้อหาคล้ายกันเพราะสรีระเดียวกัน.",
+    cites:"Cheyne & Girard; Hufford"},
+  ghost:{name:"Ghost / haunting / EVP",tag:"fact",
+    world:"ประสบการณ์อธิบายได้ด้วยกลไกวัดได้: infrasound 18.9 Hz → เห็นเงา (Tandy & Lawrence 1998), CO poisoning → ภาพหลอน, EMF → temporal lobe/presence, pareidolia (EVP=เสียงในนอยส์). Haunt Project (French 2009) พบประสบการณ์ *ไม่*สัมพันธ์กับการปรับจริง → suggestion. ไม่มีหลักฐานควบคุมของ “ผีจริง”.",
+    cites:"Tandy & Lawrence 1998; French et al. 2009"},
+  poltergeist:{name:"Poltergeist / RSPK",tag:"fact",
+    world:"มักศูนย์กลางที่วัยรุ่นเครียด (Roll เรียก RSPK = PK ไร้สำนึก). เคสดัง *เจอโกง*: Tina Resch (Columbus 1984) ถูกจับได้ปาของเองบนวิดีโอ (Randi; Nickell “poltergeist-faking syndrome”); Enfield เด็กยอมรับแกล้งบางส่วน. ทดสอบ *ควบคุม*ในแล็บ → Resch ได้ระดับสุ่ม. RSPK ไม่เคยผ่าน mainstream ไม่มีหลักฐานควบคุม.",
+    cites:"Roll (RSPK); Nickell; Randi; Resch lab null"},
+  psychedelic:{name:"Psychedelic ego-dissolution / mystical",tag:"fact",
+    world:"กลไกวัดได้: entropic brain + DMN แตกตัว (Carhart-Harris 2014); psilocybin desynchronization (Siegel, Nature 2024, §2.5). ประสบการณ์จริง; “สัมผัสความจริงลึกกว่า” contested.",
+    cites:"Carhart-Harris 2014; Siegel 2024"},
+  savant:{name:"Savant / acquired genius",tag:"fact",
+    world:"disinhibition ของความสามารถที่ถูกกรองไว้ *ภายใน* — Snyder เหนี่ยวนำด้วย tDCS/TMS ในคนปกติโดย *กด*สมองส่วนหนึ่ง ไม่ใช่ช่องนอก (§9.3.1).",
+    cites:"Snyder; Treffert; Kapur 1996"},
+  blindsight:{name:"Blindsight / covert consciousness",tag:"fact",
+    world:"ประมวลผลโดยไม่มี awareness (Weiskrantz 1986) และ awareness โดยไม่มีพฤติกรรม (Owen 2006; Bodien, NEJM 2024) — ตัด “พฤติกรรม=สำนึก” ทั้งสองทาง (§2.11).",
+    cites:"Weiskrantz; Owen 2006; Bodien 2024"},
+  "brain-lesion":{name:"Brain damage → บุคลิก/การรับรู้เพี้ยน",tag:"fact",
+    world:"วงจรเฉพาะทำงานเฉพาะ → เสียหายเฉพาะจุด = ขาดเฉพาะอย่าง: Phineas Gage (frontal→บุคลิก), Capgras, split-brain (§2.9), neglect, aphasia. กลไก [ESTABLISHED]. *การตีความ* (สมองผลิตจิต? vs “แปลผิดเฉพาะที่” §4.7) คือจุดที่ยังเถียง — cuts both ways.",
+    cites:"Harlow (Gage); Gazzaniga/Pinto; §2.9/§4.7"},
+  "anesthesia-cognition":{name:"ประมวลผลใต้ยาสลบ",tag:"fact",
+    world:"ฮิปโปแคมปัสประมวลภาษา/oddball ใต้ยาสลบ (Katlowitz…Hayden & Sheth, Nature 2026) — high-level processing ไม่ต้องมีสำนึก (§7.11).",
+    cites:"Katlowitz et al. 2026"},
+  "phantom-limb":{name:"Phantom limb — แขนขาที่หายไป",tag:"fact",
+    world:"cortical remapping หลังตัดแขนขา (Ramachandran); mirror-box บรรเทาได้ — สมองสร้าง body schema เอง พิสูจน์ว่า “การรับรู้ร่าง” เป็น construct ของสมอง.",
+    cites:"Ramachandran"},
+  dejavu:{name:"Déjà vu / familiarity",tag:"fact",
+    world:"กลไกมุนดานวัดได้: familiarity misattribution (Cleary), constructive memory (Schacter), false memory (Loftus). ไม่ต้องมีอะไรข้ามภพ.",
+    cites:"Cleary; Schacter; Loftus"},
+  synchronicity:{name:"Synchronicity — ความบังเอิญมีความหมาย",tag:"fact",
+    world:"Littlewood’s Law: คนเจอ “ปาฏิหาริย์” ~1 ครั้ง/เดือนโดยบังเอิญ (law of truly large numbers, Diaconis–Mosteller 1989) + apophenia + base-rate neglect.",
+    cites:"Littlewood; Diaconis & Mosteller 1989"},
+  other:{name:"อื่นๆ",tag:"hypo",world:"ยังไม่มี reference class — ต้องไปค้นข้อมูลโลกมาเทียบก่อนแปะแท็ก.",cites:"—"}
+};
+let rows=load(), filter="all";
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return[]}}
+function save(){localStorage.setItem(KEY,JSON.stringify(rows))}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function tagHtml(t){const m={fact:"[Fact]",hypo:"[Hypo]",contested:"[CONTESTED]",excluded:"excluded",open:"[OPEN]"};return `<span class="tag ${t}">${m[t]||t}</span>`}
+
+// build reference cards + category select
+document.getElementById("refgrid").innerHTML=Object.entries(CATS).filter(([k])=>k!=="other").map(([k,c])=>
+  `<div class="ref"><div class="cat">${k}</div><h3>${c.name}</h3><p>${c.world}</p>
+   <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">${tagHtml(c.tag)}<span class="cites">${c.cites}</span></div></div>`).join("");
+document.getElementById("f-cat").innerHTML=Object.entries(CATS).map(([k,c])=>`<option value="${k}">${c.name}</option>`).join("");
+document.getElementById("filters").innerHTML=`<button class="chip" data-f="all" aria-pressed="true">ทั้งหมด</button>`+
+  Object.keys(CATS).map(k=>`<button class="chip" data-f="${k}" aria-pressed="false">${k}</button>`).join("");
+
+function render(){
+  document.getElementById("count").textContent=rows.length;
+  const host=document.getElementById("groups");
+  const view=rows.filter(r=>filter==="all"||r.cat===filter);
+  if(!view.length){host.innerHTML=`<div class="empty">ยังไม่มีรายการ${filter!=="all"?"ในกลุ่มนี้":""}</div>`;save();return;}
+  const cats=filter==="all"?Object.keys(CATS):[filter];
+  host.innerHTML=cats.map(k=>{
+    const items=view.filter(r=>r.cat===k).sort((a,b)=>b.logged-a.logged);
+    if(!items.length)return"";
+    return `<div class="group"><div class="group-title"><span>${CATS[k].name}</span><span>${items.length} · ${tagHtml(CATS[k].tag)}</span></div>`+
+      items.map(r=>`<div class="exp">
+        <p class="q">${esc(r.q)}</p>
+        <p class="raw">${esc(r.raw)}</p>
+        <div class="meta">${tagHtml(r.tag)}<span>${new Date(r.logged).toLocaleDateString("th-TH",{day:"2-digit",month:"short",year:"2-digit"})}</span>
+        ${r.bias?`<span>bias: ${esc(r.bias)}</span>`:""}<button class="del" data-id="${r.id}">ลบ</button></div>
+        ${r.note?`<p class="vnote">${esc(r.note)}</p>`:""}</div>`).join("")+`</div>`;
+  }).join("")||`<div class="empty">ยังไม่มีรายการ</div>`;
+  save();
+}
+document.getElementById("form").addEventListener("submit",e=>{
+  e.preventDefault();const g=id=>document.getElementById(id).value.trim();
+  rows.push({id:"e"+Date.now().toString(36),logged:Date.now(),raw:g("f-raw"),q:g("f-q"),
+    cat:document.getElementById("f-cat").value,tag:document.getElementById("f-tag").value,
+    bias:g("f-bias"),note:g("f-note")});
+  e.target.reset();render();
+});
+document.getElementById("groups").addEventListener("click",e=>{
+  const b=e.target.closest(".del");if(!b)return;rows=rows.filter(r=>r.id!==b.dataset.id);render();
+});
+document.getElementById("filters").addEventListener("click",e=>{
+  const c=e.target.closest(".chip");if(!c)return;filter=c.dataset.f;
+  document.querySelectorAll("#filters .chip").forEach(x=>x.setAttribute("aria-pressed",x===c));render();
+});
+document.getElementById("btn-sample").addEventListener("click",()=>{
+  document.getElementById("f-raw").value="(ตัวอย่าง) สัตว์เลี้ยงตายโดยมีรอย 2 จุดชัด ต่อมาเด็กในครอบครัวเกิดมามีรอยตำแหน่งคล้ายกัน";
+  document.getElementById("f-q").value="ปานสัตว์เลี้ยงมาโผล่ในเด็กเกินบังเอิญไหม?";
+  document.getElementById("f-cat").value="reincarnation";
+  document.getElementById("f-tag").value="hypo";
+  document.getElementById("f-bias").value="retrospective, confirmation, look-elsewhere, base-rate";
+  document.getElementById("f-note").value="base-rate 2 จุด ~1 ใน 70–5,000; cross-species trace = dead-log L4 (cut); n=1";
+});
+document.getElementById("btn-export").addEventListener("click",()=>{
+  const blob=new Blob([JSON.stringify(rows,null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="experience-ledger.json";a.click();
+});
+document.getElementById("btn-reset").addEventListener("click",()=>{if(confirm("ล้างทั้งหมด?")){rows=[];render();}});
+render();
+</script>
+</body>
+</html>
