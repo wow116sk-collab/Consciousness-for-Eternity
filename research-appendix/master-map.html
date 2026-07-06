@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Master Map · รวม 4 tier · จิต & ปรากฏการณ์อธิบายไม่ได้</title>
+</head>
+<body>
+<style>
+:root{--paper:#f5f7f8;--panel:#fff;--ink:#131a1c;--ink-soft:#45585c;--ink-faint:#7c9095;--line:#dbe4e6;--line-strong:#c3d0d3;--accent:#0f7a82;--accent-soft:#e2f1f2;--fact:#2e7d57;--fact-bg:#e4f1ea;--hypo:#9a6c14;--hypo-bg:#f6eed8;--contested:#b4433a;--contested-bg:#f6e5e3;--open:#0f7a82;--open-bg:#e2f1f2;--mono:ui-monospace,"SF Mono",Menlo,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans Thai",system-ui,sans-serif;}
+@media(prefers-color-scheme:dark){:root{--paper:#0d1315;--panel:#141c1f;--ink:#e8eef0;--ink-soft:#a5b6ba;--ink-faint:#6d8388;--line:#243236;--line-strong:#35484d;--accent:#45b7bf;--accent-soft:#12312f;--fact:#5cc490;--fact-bg:#10241b;--hypo:#d9ad4f;--hypo-bg:#241d0e;--contested:#e2756b;--contested-bg:#2a1613;--open:#45b7bf;--open-bg:#12312f;}}
+:root[data-theme="light"]{--paper:#f5f7f8;--panel:#fff;--ink:#131a1c;--ink-soft:#45585c;--ink-faint:#7c9095;--line:#dbe4e6;--line-strong:#c3d0d3;--accent:#0f7a82;--accent-soft:#e2f1f2;--fact:#2e7d57;--fact-bg:#e4f1ea;--hypo:#9a6c14;--hypo-bg:#f6eed8;--contested:#b4433a;--contested-bg:#f6e5e3;--open:#0f7a82;--open-bg:#e2f1f2;}
+:root[data-theme="dark"]{--paper:#0d1315;--panel:#141c1f;--ink:#e8eef0;--ink-soft:#a5b6ba;--ink-faint:#6d8388;--line:#243236;--line-strong:#35484d;--accent:#45b7bf;--accent-soft:#12312f;--fact:#5cc490;--fact-bg:#10241b;--hypo:#d9ad4f;--hypo-bg:#241d0e;--contested:#e2756b;--contested-bg:#2a1613;--open:#45b7bf;--open-bg:#12312f;}
+*{box-sizing:border-box;}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:880px;margin:0 auto;padding:30px 20px 70px;}
+header{border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:8px;}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 6px;}
+h1{font-size:23px;margin:0 0 6px;}
+.sub{color:var(--ink-soft);font-size:13.5px;margin:0;max-width:70ch;}
+.legend{font-size:11.5px;color:var(--ink-faint);margin:14px 0 0;font-family:var(--mono);}
+.banner{background:var(--accent-soft);border:1px solid var(--line-strong);border-left:4px solid var(--accent);border-radius:10px;padding:11px 14px;margin:16px 0 0;font-size:12.5px;color:var(--ink-soft);}
+.banner b{color:var(--ink);}
+h2{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin:26px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px;}
+.item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin-bottom:12px;break-inside:avoid;page-break-inside:avoid;}
+.r1{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:6px;}
+.r1 .name{font-weight:600;font-size:15px;}
+.claim{font-size:12.5px;color:var(--ink-soft);font-style:italic;margin:0 0 11px;border-left:2px solid var(--line-strong);padding-left:9px;}
+.lab{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin:11px 0 5px;}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;padding:2px 8px;border-radius:999px;white-space:nowrap;}
+.tag.fact{background:var(--fact-bg);color:var(--fact);}.tag.hypo{background:var(--hypo-bg);color:var(--hypo);}.tag.contested{background:var(--contested-bg);color:var(--contested);}.tag.open{background:var(--open-bg);color:var(--open);}
+.tier{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:4px;background:var(--accent-soft);color:var(--accent);}
+.ing{display:flex;gap:9px;margin:0 0 6px;font-size:12.5px;align-items:baseline;}
+.wt{font-family:var(--mono);font-size:9.5px;padding:2px 6px;border-radius:4px;white-space:nowrap;flex-shrink:0;min-width:74px;text-align:center;}
+.wt.dom{background:var(--contested-bg);color:var(--contested);}.wt.sec{background:var(--hypo-bg);color:var(--hypo);}.wt.min{background:var(--line);color:var(--ink-faint);}.wt.note{background:var(--accent-soft);color:var(--accent);}
+.ing .in{font-weight:600;color:var(--ink);flex-shrink:0;}
+.ing .how{color:var(--ink-soft);}
+.two{background:var(--accent-soft);border-radius:8px;padding:10px 12px;margin:11px 0 0;font-size:12.5px;}
+.two .th{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:3px;}
+.two.na{background:var(--line);} .two.na .th{color:var(--ink-faint);}
+.test{font-size:12.5px;color:var(--ink-soft);margin:11px 0 0;}
+.test .lab2{color:var(--contested);}
+.foot2{font-size:10.5px;color:var(--ink-faint);font-style:italic;border-top:1px solid var(--line);padding-top:7px;margin-top:11px;}
+footer{margin-top:26px;font-size:11.5px;color:var(--ink-faint);border-top:1px solid var(--line);padding-top:12px;}
+.key{background:var(--accent-soft);border:1px solid var(--line-strong);border-left:4px solid var(--accent);border-radius:10px;padding:13px 16px;margin:16px 0 0;font-size:12.5px;}
+.key .kt{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:5px;}
+.key .k1{color:var(--fact);font-weight:600;}.key .k2{color:var(--contested);font-weight:600;}
+.ladder{margin:6px 0 0;}
+.lrow{display:flex;gap:11px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);}
+.lrow:last-child{border-bottom:none;}
+.lchip{font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;padding:3px 9px;border-radius:5px;flex-shrink:0;margin-top:1px;}
+.lbody{flex:1;}
+.lt{font-weight:600;font-size:14px;}.ln{color:var(--ink-faint);font-weight:400;font-size:11.5px;}
+.lw{color:var(--ink-soft);font-size:12.5px;margin-top:1px;}
+.lh{color:var(--ink-faint);font-size:11.5px;margin-top:2px;font-style:italic;}
+.bignum{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0 0;}
+.bn{flex:1;min-width:150px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center;}
+.bn .n{font-size:30px;font-weight:700;line-height:1;}
+.bn .n.g{color:var(--fact);}.bn .n.r{color:var(--contested);}.bn .n.o{color:var(--accent);}
+.bn .cap{font-size:11.5px;color:var(--ink-soft);margin-top:5px;}
+table.master{width:100%;border-collapse:collapse;margin:8px 0 0;font-size:12px;}
+table.master td{padding:5px 7px;border-bottom:1px solid var(--line);vertical-align:top;}
+tr.tsep td{background:var(--accent-soft);font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);padding:5px 7px;}
+tr.tsepc,.tsepc{font-weight:700;}
+.c-name{font-weight:500;width:38%;}
+.c-drv{color:var(--ink-soft);width:30%;}
+.c-l2{width:16%;white-space:nowrap;}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.03em;padding:1px 6px;border-radius:999px;white-space:nowrap;}
+.tag.fact{background:var(--fact-bg);color:var(--fact);}.tag.contested{background:var(--contested-bg);color:var(--contested);}.tag.open{background:var(--open-bg);color:var(--open);}
+.l2{font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;white-space:nowrap;}
+.l2.no{background:var(--contested-bg);color:var(--contested);}.l2.na{background:var(--line);color:var(--ink-faint);}.l2.open{background:var(--open-bg);color:var(--open);}
+.close{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin-top:14px;font-size:12.5px;color:var(--ink-soft);}
+.close b{color:var(--ink);}
+.close .ct{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+
+</style>
+<div class="wrap"><header><p class="eyebrow">Master Map · รวม 4 tier · 23 ปรากฏการณ์</p>
+<h1>แผนที่รวม — จิต & ปรากฏการณ์อธิบายไม่ได้</h1>
+<p class="sub">เชื่อม Tier 0 → 3 ให้เห็นภาพเดียว. ไล่จากหลักฐานน้อยสุด (เรื่องเล่าเดี่ยว) ไปหลักฐานแน่นสุด (วิทยาศาสตร์กระแสหลัก). คำถามเดียวที่ถามทุกเคส: <b>มัน “ส่งความรู้ที่โหลดไม่ได้” (Layer-2) ได้ไหม?</b></p>
+<div class="key"><div class="kt">🔧 กุญแจหลัก · กฎ 2 ชั้น</div>
+<span class="k1">① แพทเทิร์น/ความสามารถ</span> = อยู่ในธรรมชาติ จับได้เอง ปลดล็อกได้ (รูปทรง, จังหวะ, สถิติ, ทักษะ) — <b>ธรรมดา</b> · <span class="k2">② ความหมาย/ภาษา/ความรู้</span> = ข้อตกลงมนุษย์ ต้องเรียน โหลดจากธรรมชาติไม่ได้ (คำ, ไวยากรณ์, fact เจาะจง) — <b>ถ้าส่งได้เมื่อไหร่ = evidence จริง</b>. ทุกเคสที่อ้าง “รับจากเหนือกาย” ได้แค่ ① ไม่เคยได้ ② สักครั้ง</div>
+</header>
+
+<h2>บันไดชั้นหลักฐาน — วิธีสร้างภาพลวงเปลี่ยนไปตามชั้น แต่คำตัดสินเหมือนเดิม</h2>
+<div class="ladder"><div class="lrow"><span class="lchip" style="background:#b4433a">T0</span><div class="lbody"><div class="lt">จุดพิสูจน์น้อย <span class="ln">· 5 เคส</span></div><div class="lw">เรื่องเล่าเดี่ยว / หยิบมือ — ไม่มีการทดลองคุม</div><div class="lh">วิธีสร้างภาพลวง: ความจำแต่งเรื่อง + บังเอิญ + ตีความเกิน</div></div></div><div class="lrow"><span class="lchip" style="background:#9a6c14">T1</span><div class="lbody"><div class="lt">ข้อมูลปานกลาง <span class="ln">· 5 เคส</span></div><div class="lw">มีเคสสะสม/สำรวจ แต่ retrospective, ไม่ปิดตา</div><div class="lh">วิธีสร้างภาพลวง: กลไกสมองจริง + base-rate + เล่าย้อนหลัง</div></div></div><div class="lrow"><span class="lchip" style="background:#0f7a82">T2</span><div class="lbody"><div class="lt">psi ในแล็บ <span class="ln">· 6 เคส</span></div><div class="lw">มีการทดลอง + meta-analysis + คนทำซ้ำ</div><div class="lh">วิธีสร้างภาพลวง: สถิติ/p-hacking + รั่ว + publication bias → ล้มเมื่อ pre-register</div></div></div><div class="lrow"><span class="lchip" style="background:#2e7d57">T3</span><div class="lbody"><div class="lt">ของจริง ที่ถูกอ้างเกิน <span class="ln">· 7 เคส</span></div><div class="lw">ปรากฏการณ์จริง วิทยาศาสตร์ยอมรับ</div><div class="lh">ไม่ใช่ภาพลวง — ตัดแค่ ‘ตีความเกิน’ ที่กระโดดไปเหนือกาย</div></div></div></div>
+
+<h2>ตัวเลขที่สำคัญที่สุด</h2>
+<div class="bignum">
+<div class="bn"><div class="n">23</div><div class="cap">ปรากฏการณ์ · 4 tier · หลักฐานหลายสิบปี</div></div>
+<div class="bn"><div class="n r">0</div><div class="cap">เคยส่ง Layer-2 (ความรู้/ภาษา/fact เดาไม่ได้)</div></div>
+<div class="bn"><div class="n o">1</div><div class="cap">เปิดค้างจริง (hard problem) — นอกแกนส่งข้อมูล</div></div>
+</div>
+
+<h2>ตารางรวม — ทุกปรากฏการณ์ · ตัวขับหลัก · ส่ง Layer-2 ได้ไหม</h2>
+<table class="master"><thead><tr><td class="c-name" style="font-family:var(--mono);font-size:10px;text-transform:uppercase;color:var(--ink-faint)">ปรากฏการณ์</td><td style="font-family:var(--mono);font-size:10px;text-transform:uppercase;color:var(--ink-faint)">แท็ก</td><td class="c-drv" style="font-family:var(--mono);font-size:10px;text-transform:uppercase;color:var(--ink-faint)">ตัวขับหลัก</td><td class="c-l2" style="font-family:var(--mono);font-size:10px;text-transform:uppercase;color:var(--ink-faint)">Layer-2?</td></tr></thead>
+<tbody><tr class="tsep"><td colspan="4"><span class="tsepc" style="color:#b4433a">T0</span> จุดพิสูจน์น้อย</td></tr><tr><td class="c-name">Xenoglossy — พูดภาษาที่ไม่เคยเรียน</td><td><span class="tag fact">EST</span></td><td class="c-drv">ความจำแต่งเรื่อง (cryptomnesia)</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Veridical NDE/OBE (Pam Reynolds, รองเท้า)</td><td><span class="tag contested">CON</span></td><td class="c-drv">สมองสร้างเอง + รั่วทางปกติ</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Past-life regression (Bridey Murphy)</td><td><span class="tag fact">EST</span></td><td class="c-drv">cryptomnesia + สะกดจิตนำ</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Crisis apparitions (เห็นคนไกลตอนตาย)</td><td><span class="tag contested">CON</span></td><td class="c-drv">บังเอิญ + base-rate + เล่าย้อน</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Poltergeist / RSPK (ของขยับเอง)</td><td><span class="tag fact">EST</span></td><td class="c-drv">คนแกล้ง + ตีความเกิน</td><td class="c-l2"><span class="l2 na">— ไม่เกี่ยว</span></td></tr><tr class="tsep"><td colspan="4"><span class="tsepc" style="color:#9a6c14">T1</span> ข้อมูลปานกลาง</td></tr><tr><td class="c-name">Mediumship (คนทรงเล่าเรื่องคนตาย)</td><td><span class="tag fact">EST</span></td><td class="c-drv">cold reading + Barnum</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Terminal lucidity (สมองเสียแต่แจ่มก่อนตาย)</td><td><span class="tag contested">CON</span></td><td class="c-drv">สมองสร้างเอง (gamma surge)</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Precognitive dreams (ฝันเป็นจริง)</td><td><span class="tag fact">EST</span></td><td class="c-drv">บังเอิญ (law of large numbers)</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Acquired savant (เก่งหลังหัวกระแทก)</td><td><span class="tag fact">EST</span></td><td class="c-drv">สมองปลดล็อก (disinhibition)</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Near-death experience (อุโมงค์/แสง)</td><td><span class="tag fact">EST</span></td><td class="c-drv">สมองสร้างเอง (hypoxia) — AWARE null</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr class="tsep"><td colspan="4"><span class="tsepc" style="color:#0f7a82">T2</span> psi ในแล็บ</td></tr><tr><td class="c-name">Ganzfeld telepathy</td><td><span class="tag contested">CON</span></td><td class="c-drv">ข้อมูลรั่ว + ปัญหาการทดลอง</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Micro-PK / RNG (จิตดันเครื่องสุ่ม)</td><td><span class="tag contested">CON</span></td><td class="c-drv">สถิติ + publication bias</td><td class="c-l2"><span class="l2 no">✗ 0 บิต</span></td></tr><tr><td class="c-name">Remote viewing (Stargate/CIA)</td><td><span class="tag contested">CON</span></td><td class="c-drv">cuing + subjective validation</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Precognition / presentiment (Bem 2011)</td><td><span class="tag contested">CON</span></td><td class="c-drv">p-hacking (d 0.22→0.04)</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">DMILS / remote staring (รู้สึกถูกจ้อง)</td><td><span class="tag contested">CON</span></td><td class="c-drv">experimenter effect</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Global Consciousness Project</td><td><span class="tag contested">CON</span></td><td class="c-drv">forking paths (เลือกหน้าต่าง)</td><td class="c-l2"><span class="l2 no">✗ 0 บิต</span></td></tr><tr class="tsep"><td colspan="4"><span class="tsepc" style="color:#2e7d57">T3</span> ของจริง ถูกอ้างเกิน</td></tr><tr><td class="c-name">Placebo / nocebo (ยาหลอก)</td><td><span class="tag fact">EST</span></td><td class="c-drv">สมองสร้างเอง (เคมีจริง)</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Hypnosis (สะกดจิต)</td><td><span class="tag fact">EST</span></td><td class="c-drv">สมาธิ/ชี้นำ (จริง)</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Meditation / mystical states (สมาธิ)</td><td><span class="tag fact">EST</span></td><td class="c-drv">DMN สลาย (จริง)</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Savant syndrome (congenital)</td><td><span class="tag fact">EST</span></td><td class="c-drv">สมองปลดล็อก — สะอาดสุด</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Blindsight (เห็นโดยไม่รู้ตัว)</td><td><span class="tag fact">EST</span></td><td class="c-drv">การเห็นผ่านสมองส่วนล่าง</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Split-brain (ผ่าสมองแยกซีก)</td><td><span class="tag fact">EST</span></td><td class="c-drv">ตัด callosum (จริง)</td><td class="c-l2"><span class="l2 no">✗ ไม่เคย</span></td></tr><tr><td class="c-name">Hard problem of consciousness</td><td><span class="tag open">OPEN</span></td><td class="c-drv">— (คำถามเรื่องธรรมชาติของประสบการณ์)</td><td class="c-l2"><span class="l2 open">✦ เปิดค้าง</span></td></tr></tbody></table>
+<p class="legend" style="margin-top:8px">แท็ก: <span class="tag fact">EST</span> = กลไกวัดได้ · <span class="tag contested">CON</span> = เถียงกัน เอียง excluded · <span class="tag open">OPEN</span> = frontier · Layer-2: <span class="l2 no">✗</span> ไม่เคยส่ง · <span class="l2 na">—</span> ไม่เกี่ยว · <span class="l2 open">✦</span> เปิดค้าง</p>
+
+<div class="close"><div class="ct">สิ่งที่แผนที่นี้บอก</div>
+<b>1. คำตัดสินเหมือนกันทั้ง 4 ชั้น.</b> ต่างกันแค่ “วิธีสร้างภาพลวง” — เรื่องเล่า (T0/1) → artifact ในแล็บ (T2) → ของจริงที่ถูกอ่านเกิน (T3). แต่ผลลง Layer-1 เสมอ, Layer-2 = ศูนย์.<br><br>
+<b>2. กฎ 2 ชั้นคือตัวคัดที่ทนที่สุด.</b> ไม่ว่าหลักฐานจะน้อยหรือแน่น คำถาม “ได้ความรู้ที่โหลดไม่ได้ไหม” ตัดขาดทุกเคส — savant ได้แค่แพทเทิร์น, micro-PK ได้ 0 บิต, mystical ได้ความรู้สึกไม่ใช่ fact.<br><br>
+<b>3. มีหนึ่งกล่องที่เว้นว่างอย่างซื่อสัตย์.</b> hard problem — “ทำไมประมวลผลแล้วถึงมีความรู้สึก” — ยังไม่มีใครปิด. แต่มัน <b>ไม่ใช่ใบอนุญาต</b>ให้เรื่องเหนือกาย: “ยังไม่รู้ว่าทำไมถึงรู้สึก” ≠ “จิตแยกจากสมองได้”.<br><br>
+<b>4. ความเชื่อส่วนตัว ≠ หลักฐานสาธารณะ.</b> ประสบการณ์เดี่ยวเป็น <b>ตัวจุดคำถาม</b> ที่ชอบธรรม (§6.6) แต่คำตอบมาจากกำแพง [Fact] เท่านั้น — ยึดสองสถานะนี้แยกกันได้โดยไม่ต้องทิ้งอันใดอันหนึ่ง</div>
+
+<footer>Master synthesis · รวม Tier 0+1 · Tier 2 · Tier 3 · Deep Dossier · Evidence Map · เก็บนอกเอกสาร CoE (§6.6/§6.7) · งานวิจัยทั่วไป ไม่มีข้อมูลส่วนตัว</footer></div>
+</body>
+</html>
