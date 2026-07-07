@@ -49,9 +49,9 @@ CoE is the master metaphysical framework in a larger program aimed at long-horiz
 
 ## Citation
 
-> Rungsiyapornratana, P. (2026). *Consciousness for Eternity (CoE): A Substrate-Brane Framework for Consciousness, Time, and Cosmology* (Version 2.26). Zenodo. https://doi.org/10.5281/zenodo.21156743
+> Rungsiyapornratana, P. (2026). *Consciousness for Eternity (CoE): A Substrate-Brane Framework for Consciousness, Time, and Cosmology* (Version 2.27). Zenodo. https://doi.org/10.5281/zenodo.21156743
 
-Archived on Zenodo under a **concept DOI** — [10.5281/zenodo.21156743](https://doi.org/10.5281/zenodo.21156743) — which always resolves to the latest version. Each tagged GitHub release (e.g. `v2.26`) also receives its own version DOI under that concept.
+Archived on Zenodo under a **concept DOI** — [10.5281/zenodo.21156743](https://doi.org/10.5281/zenodo.21156743) — which always resolves to the latest version. Each tagged GitHub release (e.g. `v2.27`) also receives its own version DOI under that concept.
 
 ## License
 
