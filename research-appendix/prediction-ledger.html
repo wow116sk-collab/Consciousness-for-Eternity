@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>สมุดทำนาย — Falsification Ledger</title>
+</head>
+<body>
+<style>
+  :root {
+    --paper: #f5f7f8;
+    --panel: #ffffff;
+    --ink: #131a1c;
+    --ink-soft: #45585c;
+    --ink-faint: #7c9095;
+    --line: #dbe4e6;
+    --line-strong: #c3d0d3;
+    --accent: #0f7a82;
+    --accent-soft: #e2f1f2;
+    --hit: #2e7d57;
+    --hit-bg: #e4f1ea;
+    --miss: #b4433a;
+    --miss-bg: #f6e5e3;
+    --pending: #9a6c14;
+    --pending-bg: #f6eed8;
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Thai", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0d1315;
+      --panel: #141c1f;
+      --ink: #e8eef0;
+      --ink-soft: #a5b6ba;
+      --ink-faint: #6d8388;
+      --line: #243236;
+      --line-strong: #35484d;
+      --accent: #45b7bf;
+      --accent-soft: #12312f;
+      --hit: #5cc490;
+      --hit-bg: #10241b;
+      --miss: #e2756b;
+      --miss-bg: #2a1613;
+      --pending: #d9ad4f;
+      --pending-bg: #241d0e;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #f5f7f8; --panel: #ffffff; --ink: #131a1c; --ink-soft: #45585c;
+    --ink-faint: #7c9095; --line: #dbe4e6; --line-strong: #c3d0d3;
+    --accent: #0f7a82; --accent-soft: #e2f1f2;
+    --hit: #2e7d57; --hit-bg: #e4f1ea; --miss: #b4433a; --miss-bg: #f6e5e3;
+    --pending: #9a6c14; --pending-bg: #f6eed8;
+  }
+  :root[data-theme="dark"] {
+    --paper: #0d1315; --panel: #141c1f; --ink: #e8eef0; --ink-soft: #a5b6ba;
+    --ink-faint: #6d8388; --line: #243236; --line-strong: #35484d;
+    --accent: #45b7bf; --accent-soft: #12312f;
+    --hit: #5cc490; --hit-bg: #10241b; --miss: #e2756b; --miss-bg: #2a1613;
+    --pending: #d9ad4f; --pending-bg: #241d0e;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--sans); line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 32px 20px 80px; }
+
+  header { border-bottom: 2px solid var(--ink); padding-bottom: 16px; margin-bottom: 24px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 6px;
+  }
+  h1 { font-size: 26px; margin: 0 0 6px; letter-spacing: -.01em; text-wrap: balance; }
+  .sub { color: var(--ink-soft); font-size: 14px; margin: 0; max-width: 62ch; }
+
+  /* verdict panel */
+  .verdicts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+  @media (max-width: 640px) { .verdicts { grid-template-columns: 1fr; } }
+  .vcard {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px 18px 16px; position: relative; overflow: hidden;
+  }
+  .vcard::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--line-strong);
+  }
+  .vcard.signal::before { background: var(--hit); }
+  .vcard.nosignal::before { background: var(--ink-faint); }
+  .vcard h2 {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-faint); margin: 0 0 10px;
+  }
+  .vhead { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .vrate {
+    font-family: var(--mono); font-size: 32px; font-weight: 600; letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums; line-height: 1;
+  }
+  .vbase { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+  .vnote { font-size: 12.5px; color: var(--ink-soft); margin: 12px 0 0; }
+  .vtag {
+    display: inline-block; font-family: var(--mono); font-size: 11px; letter-spacing: .04em;
+    padding: 3px 8px; border-radius: 999px; margin-top: 10px; font-variant-numeric: tabular-nums;
+  }
+  .vtag.signal { background: var(--hit-bg); color: var(--hit); }
+  .vtag.nosignal { background: var(--line); color: var(--ink-soft); }
+
+  /* form */
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 20px; margin-bottom: 24px;
+  }
+  .card > h3 {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 0 0 4px;
+  }
+  .card > .hint { font-size: 12.5px; color: var(--ink-faint); margin: 0 0 18px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field.full { grid-column: 1 / -1; }
+  label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .04em; color: var(--ink-soft);
+    display: flex; align-items: center; gap: 6px;
+  }
+  label .req { color: var(--miss); }
+  input, textarea, select {
+    font-family: var(--sans); font-size: 14px; color: var(--ink);
+    background: var(--paper); border: 1px solid var(--line-strong); border-radius: 8px;
+    padding: 9px 11px; width: 100%;
+  }
+  textarea { resize: vertical; min-height: 46px; }
+  input:focus, textarea:focus, select:focus {
+    outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
+  }
+  .row-inline { display: flex; gap: 10px; align-items: center; }
+  .row-inline input { max-width: 110px; }
+  .suffix { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); }
+
+  .actions { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  button {
+    font-family: var(--sans); font-size: 13.5px; font-weight: 500; cursor: pointer;
+    border-radius: 8px; padding: 10px 16px; border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { filter: brightness(1.07); }
+  .btn-ghost { background: transparent; color: var(--ink-soft); border-color: var(--line-strong); }
+  .btn-ghost:hover { color: var(--ink); border-color: var(--ink-faint); }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ledger */
+  .ledger-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+  .ledger-head h3 {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 0;
+  }
+  .filters { display: flex; gap: 6px; }
+  .chip {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .03em; padding: 5px 11px;
+    border-radius: 999px; border: 1px solid var(--line-strong); background: transparent;
+    color: var(--ink-soft); cursor: pointer;
+  }
+  .chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+  table { width: 100%; border-collapse: collapse; min-width: 720px; }
+  th {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--ink-faint); text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line);
+    font-weight: 500; white-space: nowrap;
+  }
+  td { padding: 12px 14px; border-bottom: 1px solid var(--line); font-size: 13.5px; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .pred-text { color: var(--ink); font-weight: 500; }
+  .pred-meta { color: var(--ink-faint); font-size: 12px; margin-top: 3px; font-family: var(--mono); }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .tierbadge {
+    font-family: var(--mono); font-size: 10.5px; padding: 2px 7px; border-radius: 4px;
+    background: var(--accent-soft); color: var(--accent); white-space: nowrap;
+  }
+  .pill {
+    font-family: var(--mono); font-size: 11px; padding: 3px 9px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+  }
+  .pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .pill.pending { background: var(--pending-bg); color: var(--pending); }
+  .pill.hit { background: var(--hit-bg); color: var(--hit); }
+  .pill.miss { background: var(--miss-bg); color: var(--miss); }
+  .rowbtns { display: flex; gap: 6px; }
+  .mini {
+    font-family: var(--mono); font-size: 11px; padding: 4px 9px; border-radius: 6px;
+    border: 1px solid var(--line-strong); background: transparent; cursor: pointer; color: var(--ink-soft);
+  }
+  .mini.hit:hover { background: var(--hit-bg); color: var(--hit); border-color: var(--hit); }
+  .mini.miss:hover { background: var(--miss-bg); color: var(--miss); border-color: var(--miss); }
+  .mini.undo:hover { background: var(--line); color: var(--ink); }
+  .empty { padding: 40px 20px; text-align: center; color: var(--ink-faint); font-size: 13.5px; }
+
+  footer { margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+  .foot-note { font-size: 12px; color: var(--ink-faint); max-width: 60ch; }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Falsification Ledger · ชั้น 1–3</p>
+    <h1>สมุดทำนาย — เครื่องทดสอบว่าอนาคตอ่านได้ไหม</h1>
+    <p class="sub">บันทึกคำทำนาย <em>ล่วงหน้า</em> พร้อมเงื่อนไขตัดสินและ base rate แล้วนับทั้งที่ตรงและที่พลาด คำตัดสินวัดที่ <strong>hit rate − base rate</strong> ไม่ใช่ที่ความรู้สึก · เฉพาะ <strong>ชั้น 3</strong> เท่านั้นที่ falsify กำแพง "อ่านอนาคตไม่ได้" ของเอกสาร</p>
+  </header>
+
+  <section class="verdicts" aria-label="คำตัดสิน">
+    <div class="vcard" id="v-all">
+      <h2>ทั้งหมด · ทุกชั้น</h2>
+      <div class="vhead">
+        <span class="vrate" id="all-rate">—</span>
+        <span class="vbase" id="all-base"></span>
+      </div>
+      <span class="vtag nosignal" id="all-tag">ยังไม่มีข้อมูล</span>
+      <p class="vnote" id="all-note">ชนะ base rate = มีสัญญาณเกินบังเอิญ (อาจเป็นการอ่านปัจจุบัน)</p>
+    </div>
+    <div class="vcard" id="v-t3">
+      <h2>ชั้น 3 · เดาจากปัจจุบันไม่ได้</h2>
+      <div class="vhead">
+        <span class="vrate" id="t3-rate">—</span>
+        <span class="vbase" id="t3-base"></span>
+      </div>
+      <span class="vtag nosignal" id="t3-tag">ยังไม่มีข้อมูล</span>
+      <p class="vnote" id="t3-note">ชั้นเดียวที่ falsify เอกสารได้ — ต้องชนะ base rate ที่นี่</p>
+    </div>
+  </section>
+
+  <div class="card">
+    <h3>ลงบันทึกคำทำนาย (ก่อนเหตุการณ์)</h3>
+    <p class="hint">เวลาลงจะถูกล็อกอัตโนมัติ เพื่อรับประกันว่าเป็นการทำนาย <em>ล่วงหน้า</em> จริง</p>
+    <form id="form">
+      <div class="grid">
+        <div class="field full">
+          <label>คำทำนาย <span class="req">*</span></label>
+          <textarea id="f-pred" required placeholder="เช่น: ลูกจะชนะการแข่งที่สมัครภายในเดือนนี้"></textarea>
+        </div>
+        <div class="field">
+          <label>เงื่อนไขตัดสิน (นับว่า "ตรง" เมื่อ...) <span class="req">*</span></label>
+          <input id="f-crit" required placeholder="ได้ที่ 1 ในรายการที่สมัคร" />
+        </div>
+        <div class="field">
+          <label>ผลถ้าล้มเหลว (นับว่า "พลาด" เมื่อ...) <span class="req">*</span></label>
+          <input id="f-fail" required placeholder="ไม่ได้ที่ 1 หรือไม่ได้แข่ง" />
+        </div>
+        <div class="field">
+          <label>ผู้ทำนาย <span class="req">*</span></label>
+          <input id="f-who" required value="หมอดู" />
+        </div>
+        <div class="field">
+          <label>วันตัดสิน (resolve by) <span class="req">*</span></label>
+          <input id="f-date" type="date" required />
+        </div>
+        <div class="field">
+          <label>base rate ประเมิน (เกิดเองกี่ % ในกรอบนี้) <span class="req">*</span></label>
+          <div class="row-inline">
+            <input id="f-base" type="number" min="0" max="100" step="1" required placeholder="25" />
+            <span class="suffix">%</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>ชั้น (Tier) <span class="req">*</span></label>
+          <select id="f-tier" required>
+            <option value="1">ชั้น 1 — ชนะบังเอิญไหม (เดาจากปัจจุบันได้)</option>
+            <option value="2">ชั้น 2 — ไม่ใช่แค่อ่านปัจจุบัน</option>
+            <option value="3">ชั้น 3 — เดาจากปัจจุบันไม่ได้เลย</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>ความมั่นใจผู้ทำนาย (ถ้ามี)</label>
+          <div class="row-inline">
+            <input id="f-conf" type="number" min="0" max="100" step="1" placeholder="—" />
+            <span class="suffix">%</span>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button type="submit" class="btn-primary">ลงบันทึก (ล็อกเวลา)</button>
+        <button type="button" class="btn-ghost" id="btn-sample">ใส่ตัวอย่าง</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="ledger-head">
+    <h3>สมุด · <span class="num" id="count">0</span> รายการ</h3>
+    <div class="filters" role="group" aria-label="กรองชั้น">
+      <button class="chip" data-f="all" aria-pressed="true">ทุกชั้น</button>
+      <button class="chip" data-f="1" aria-pressed="false">ชั้น 1</button>
+      <button class="chip" data-f="2" aria-pressed="false">ชั้น 2</button>
+      <button class="chip" data-f="3" aria-pressed="false">ชั้น 3</button>
+    </div>
+  </div>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>คำทำนาย</th>
+          <th>ชั้น</th>
+          <th class="num">base</th>
+          <th>ลงเมื่อ</th>
+          <th>ตัดสิน</th>
+          <th>สถานะ</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p class="foot-note">ทดสอบ ≠ ยืนยัน — สมุดนี้ต้องพูดคำว่า "ไม่" ได้ p-value คิดจาก binomial ทางเดียวเทียบ base rate เฉลี่ยเป็นสมมติฐานว่าง แนะนำ N ≥ 30 ต่อชั้น</p>
+    <div class="filters">
+      <button class="btn-ghost" id="btn-export">ส่งออก JSON</button>
+      <button class="btn-ghost" id="btn-reset">ล้างทั้งหมด</button>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const KEY = "coe_prediction_ledger_v1";
+  let rows = load();
+  let filter = "all";
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY)) || []; }
+    catch (e) { return []; }
+  }
+  function save() { localStorage.setItem(KEY, JSON.stringify(rows)); }
+
+  // ---- binomial one-sided p-value: P(X >= k | n, p0) ----
+  const logFactCache = [0, 0];
+  function logFact(n) {
+    for (let i = logFactCache.length; i <= n; i++) logFactCache[i] = logFactCache[i-1] + Math.log(i);
+    return logFactCache[n];
+  }
+  function binomTail(k, n, p) {
+    if (p <= 0) return k <= 0 ? 1 : 0;
+    if (p >= 1) return 1;
+    let sum = 0;
+    for (let i = k; i <= n; i++) {
+      const logp = logFact(n) - logFact(i) - logFact(n-i) + i*Math.log(p) + (n-i)*Math.log(1-p);
+      sum += Math.exp(logp);
+    }
+    return Math.min(1, sum);
+  }
+
+  function fmtDate(iso) {
+    const d = new Date(iso);
+    return d.toLocaleDateString("th-TH", { day: "2-digit", month: "short", year: "2-digit" });
+  }
+
+  function renderVerdict(subset, ids) {
+    const resolved = subset.filter(r => r.status !== "pending");
+    const n = resolved.length;
+    const hits = resolved.filter(r => r.status === "hit").length;
+    const rateEl = document.getElementById(ids.rate);
+    const baseEl = document.getElementById(ids.base);
+    const tagEl = document.getElementById(ids.tag);
+    const card = document.getElementById(ids.card);
+    card.classList.remove("signal", "nosignal");
+
+    if (n === 0) {
+      rateEl.textContent = "—";
+      baseEl.textContent = subset.length ? `(${subset.length} รอตัดสิน)` : "";
+      tagEl.textContent = "ยังไม่มีข้อมูล";
+      tagEl.className = "vtag nosignal";
+      card.classList.add("nosignal");
+      return;
+    }
+    const hitRate = hits / n;
+    const avgBase = resolved.reduce((s, r) => s + (+r.base), 0) / n / 100;
+    rateEl.textContent = Math.round(hitRate * 100) + "%";
+    baseEl.textContent = `hit ${hits}/${n} · base ${Math.round(avgBase*100)}%`;
+
+    if (n < 10) {
+      tagEl.textContent = `N=${n} — ยังน้อยเกินสรุป`;
+      tagEl.className = "vtag nosignal";
+      card.classList.add("nosignal");
+      return;
+    }
+    const p = binomTail(hits, n, avgBase);
+    const win = hitRate > avgBase && p < 0.05;
+    tagEl.textContent = (win ? "ชนะ base rate · p=" : "ยังไม่ชนะ · p=") + p.toFixed(3);
+    tagEl.className = "vtag " + (win ? "signal" : "nosignal");
+    card.classList.add(win ? "signal" : "nosignal");
+  }
+
+  function render() {
+    renderVerdict(rows, { rate: "all-rate", base: "all-base", tag: "all-tag", card: "v-all" });
+    renderVerdict(rows.filter(r => r.tier === "3"), { rate: "t3-rate", base: "t3-base", tag: "t3-tag", card: "v-t3" });
+
+    document.getElementById("count").textContent = rows.length;
+    const tbody = document.getElementById("tbody");
+    const view = rows.filter(r => filter === "all" || r.tier === filter)
+                     .sort((a,b) => b.logged - a.logged);
+    if (!view.length) {
+      tbody.innerHTML = `<tr><td colspan="7"><div class="empty">ยังไม่มีรายการ${filter!=="all"?"ในชั้นนี้":""} — ลงบันทึกคำทำนายแรกด้านบน</div></td></tr>`;
+      save(); return;
+    }
+    tbody.innerHTML = view.map(r => {
+      const status = r.status === "hit" ? '<span class="pill hit">ตรง</span>'
+                   : r.status === "miss" ? '<span class="pill miss">พลาด</span>'
+                   : '<span class="pill pending">รอตัดสิน</span>';
+      const btns = r.status === "pending"
+        ? `<button class="mini hit" data-act="hit" data-id="${r.id}">ตรง</button>
+           <button class="mini miss" data-act="miss" data-id="${r.id}">พลาด</button>`
+        : `<button class="mini undo" data-act="undo" data-id="${r.id}">คืนค่า</button>`;
+      return `<tr>
+        <td><div class="pred-text">${esc(r.pred)}</div>
+          <div class="pred-meta">${esc(r.who)} · ตรงเมื่อ: ${esc(r.crit)}</div></td>
+        <td><span class="tierbadge">T${r.tier}</span></td>
+        <td class="num">${r.base}%</td>
+        <td class="num">${fmtDate(r.logged)}</td>
+        <td class="num">${r.date ? fmtDate(r.date) : "—"}</td>
+        <td>${status}</td>
+        <td><div class="rowbtns">${btns}</div></td>
+      </tr>`;
+    }).join("");
+    save();
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+  }
+
+  document.getElementById("form").addEventListener("submit", e => {
+    e.preventDefault();
+    const g = id => document.getElementById(id).value.trim();
+    const base = +document.getElementById("f-base").value;
+    if (base < 0 || base > 100) return;
+    rows.push({
+      id: "p" + Date.now().toString(36) + Math.floor(performance.now()).toString(36),
+      logged: Date.now(),
+      pred: g("f-pred"), crit: g("f-crit"), fail: g("f-fail"),
+      who: g("f-who") || "—", date: g("f-date"),
+      base: base, tier: document.getElementById("f-tier").value,
+      conf: g("f-conf") || null, status: "pending"
+    });
+    e.target.reset();
+    document.getElementById("f-who").value = "หมอดู";
+    render();
+  });
+
+  document.getElementById("tbody").addEventListener("click", e => {
+    const b = e.target.closest("button[data-act]");
+    if (!b) return;
+    const r = rows.find(x => x.id === b.dataset.id);
+    if (!r) return;
+    r.status = b.dataset.act === "undo" ? "pending" : b.dataset.act;
+    render();
+  });
+
+  document.querySelectorAll(".chip[data-f]").forEach(c => {
+    c.addEventListener("click", () => {
+      filter = c.dataset.f;
+      document.querySelectorAll(".chip[data-f]").forEach(x => x.setAttribute("aria-pressed", x === c));
+      render();
+    });
+  });
+
+  document.getElementById("btn-export").addEventListener("click", () => {
+    const blob = new Blob([JSON.stringify(rows, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "prediction-ledger.json";
+    a.click();
+  });
+
+  document.getElementById("btn-reset").addEventListener("click", () => {
+    if (confirm("ล้างทุกรายการ? กู้คืนไม่ได้")) { rows = []; render(); }
+  });
+
+  document.getElementById("btn-sample").addEventListener("click", () => {
+    document.getElementById("f-pred").value = "ภายในเดือนนี้ ลูกจะได้รางวัลจากการประกวดที่ไปแข่ง";
+    document.getElementById("f-crit").value = "ได้รางวัลอันดับ (ที่ 1–3) ในรายการที่ระบุ";
+    document.getElementById("f-fail").value = "ไม่ได้รางวัลใดเลย หรือไม่ได้ไปแข่ง";
+    document.getElementById("f-base").value = "30";
+    document.getElementById("f-tier").value = "1";
+    const d = new Date(); d.setMonth(d.getMonth()+1);
+    document.getElementById("f-date").value = d.toISOString().slice(0,10);
+  });
+
+  render();
+</script>
+</body>
+</html>

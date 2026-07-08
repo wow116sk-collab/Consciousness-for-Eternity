@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evidence Map — จิต & ปรากฏการณ์อธิบายไม่ได้</title>
+</head>
+<body>
+<style>
+  :root{
+    --paper:#f5f7f8;--panel:#fff;--ink:#131a1c;--ink-soft:#45585c;--ink-faint:#7c9095;
+    --line:#dbe4e6;--line-strong:#c3d0d3;--accent:#0f7a82;--accent-soft:#e2f1f2;
+    --fact:#2e7d57;--fact-bg:#e4f1ea;--hypo:#9a6c14;--hypo-bg:#f6eed8;
+    --contested:#b4433a;--contested-bg:#f6e5e3;--open:#0f7a82;--open-bg:#e2f1f2;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans Thai",system-ui,sans-serif;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --paper:#0d1315;--panel:#141c1f;--ink:#e8eef0;--ink-soft:#a5b6ba;--ink-faint:#6d8388;
+    --line:#243236;--line-strong:#35484d;--accent:#45b7bf;--accent-soft:#12312f;
+    --fact:#5cc490;--fact-bg:#10241b;--hypo:#d9ad4f;--hypo-bg:#241d0e;
+    --contested:#e2756b;--contested-bg:#2a1613;--open:#45b7bf;--open-bg:#12312f;
+  }}
+  :root[data-theme="light"]{--paper:#f5f7f8;--panel:#fff;--ink:#131a1c;--ink-soft:#45585c;--ink-faint:#7c9095;--line:#dbe4e6;--line-strong:#c3d0d3;--accent:#0f7a82;--accent-soft:#e2f1f2;--fact:#2e7d57;--fact-bg:#e4f1ea;--hypo:#9a6c14;--hypo-bg:#f6eed8;--contested:#b4433a;--contested-bg:#f6e5e3;--open:#0f7a82;--open-bg:#e2f1f2;}
+  :root[data-theme="dark"]{--paper:#0d1315;--panel:#141c1f;--ink:#e8eef0;--ink-soft:#a5b6ba;--ink-faint:#6d8388;--line:#243236;--line-strong:#35484d;--accent:#45b7bf;--accent-soft:#12312f;--fact:#5cc490;--fact-bg:#10241b;--hypo:#d9ad4f;--hypo-bg:#241d0e;--contested:#e2756b;--contested-bg:#2a1613;--open:#45b7bf;--open-bg:#12312f;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:940px;margin:0 auto;padding:32px 20px 80px;}
+  header{border-bottom:2px solid var(--ink);padding-bottom:16px;margin-bottom:22px;}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 6px;}
+  h1{font-size:25px;margin:0 0 6px;letter-spacing:-.01em;text-wrap:balance;}
+  .sub{color:var(--ink-soft);font-size:14px;margin:0;max-width:70ch;}
+  .thesis{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:16px 18px;margin:22px 0;}
+  .thesis b{color:var(--ink);}
+  .thesis p{margin:0;font-size:14px;color:var(--ink-soft);}
+
+  h2{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin:30px 0 4px;border-bottom:1px solid var(--line);padding-bottom:7px;}
+  .gdesc{font-size:12.5px;color:var(--ink-faint);margin:6px 0 12px;}
+  .sub-item{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 15px;margin-bottom:8px;}
+  .row1{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:5px;}
+  .row1 .name{font-weight:600;font-size:14px;}
+  .core{font-size:13px;color:var(--ink-soft);margin:0 0 5px;}
+  .wall{font-size:12px;color:var(--ink-faint);font-family:var(--mono);}
+  .wall b{color:var(--contested);font-weight:600;}
+  .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;padding:2px 8px;border-radius:999px;white-space:nowrap;}
+  .tag.fact{background:var(--fact-bg);color:var(--fact);}.tag.hypo{background:var(--hypo-bg);color:var(--hypo);}
+  .tag.contested{background:var(--contested-bg);color:var(--contested);}.tag.open{background:var(--open-bg);color:var(--open);}
+
+  .threads{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 20px 14px;margin:8px 0 4px;}
+  .threads ol{margin:0;padding-left:22px;}
+  .threads li{margin:11px 0;font-size:13.5px;}
+  .threads li b{color:var(--accent);}
+  .matrix{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px;overflow-x:auto;display:block;}
+  .matrix th,.matrix td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top;}
+  .matrix th{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;color:var(--ink-faint);background:var(--accent-soft);}
+  .matrix td.mono{font-family:var(--mono);font-variant-numeric:tabular-nums;}
+  footer{margin-top:30px;font-size:12px;color:var(--ink-faint);border-top:1px solid var(--line);padding-top:14px;}
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">Evidence Map · 6 กลุ่มใหญ่ · 27 กลุ่มย่อย · 5 types</p>
+  <h1>จิต & ปรากฏการณ์ที่ “อธิบายไม่ได้” — แผนที่หลักฐาน</h1>
+  <p class="sub">ทุกปรากฏการณ์ถูกจัดกลุ่ม → เก็บ core evidence (ตัวเลข/งานหลัก) → ระบุ “กำแพง” ที่ทำให้มันไม่ผ่านบาร์ แล้วสกัด <strong>จุดร่วม</strong> ที่ทุกอันแชร์กัน</p>
+</header>
+
+<div class="thesis"><p><b>Master pattern:</b> หลักฐานที่ <i>รู้สึกแรงที่สุด</i> คือหลักฐานที่ <i>ควบคุมน้อยที่สุด</i> เสมอ — พอใส่ control / prospective / replication เข้าไป เอฟเฟกต์หดเข้าหา “สุ่ม” ทุกครั้ง <b>ยกเว้นอันเดียว</b>: hard problem ซึ่งไม่ใช่ effect เชิงประจักษ์ตั้งแต่แรก</p></div>
+
+<h2>จุดร่วม — 10 Common Threads (สกัดจากทุกกลุ่ม)</h2>
+<div class="threads"><ol>
+  <li><b>กำแพง replication.</b> เอฟเฟกต์อยู่ใน meta-analysis แต่ตายใน replication อิสระ — Ganzfeld null (Milton–Wiseman 1999), PEAR 3-lab fail, Resch lab = สุ่ม, STEP prayer = null.</li>
+  <li><b>หายเมื่อถูกสังเกต/ควบคุม.</b> poltergeist หยุดเมื่อถูกจับตา; haunting ไม่สัมพันธ์กับการปรับจริง (= suggestion); RNG effect ≈ สุ่มเมื่อคุมแน่น.</li>
+  <li><b>Retrospective ≫ prospective.</b> หลักฐานที่ชวนเชื่อคือ retrospective ([Hypo] tie); ชุด prospective ที่มีจริงเล็กมากและอ่อน/null — ระลึกชาติจดก่อนตรวจแค่ 1.3%.</li>
+  <li><b>Effect size จิ๋ว + selection/publication bias.</b> 50.02% (PEAR), 32% (Ganzfeld), +5–15% (RV); decline effect; file-drawer (Schmidt 71 หนุน / 261 ล้ม).</li>
+  <li><b>Base-rate neglect / look-elsewhere.</b> ความบังเอิญรู้สึกมีความหมาย (Littlewood’s law; base-rate ปาน); เลือกเป้าหลังเห็นผล.</li>
+  <li><b>ประสบการณ์จริง ≠ ตีความชอบธรรม.</b> กลุ่ม D/E: กลไกมุนดานสร้าง <i>ความรู้สึก</i> ได้เต็ม; การกระโดดไป “เบื้องหลัง” ไม่มีหลักฐาน — และข้อมูลเดียวกันมัก fit ได้ทั้งสองอ่าน (§2.9).</li>
+  <li><b>Present-inference ปลอมเป็น future/psi.</b> ทำนายแม่นระยะใกล้ = อ่านเหตุปัจจุบัน; ความแม่นตกตามระยะ = ลายเซ็น.</li>
+  <li><b>Fraud ตรงที่เดิมพัน/ความสนใจสูง.</b> poltergeist (Resch จับได้บนวิดีโอ), mediumship (cold reading), บางเคสระลึกชาติ.</li>
+  <li><b>existence ≠ access (แกนฟิสิกส์ CoE).</b> ต่อให้บางอย่างคงอยู่ (ระเบียบไร้ตัวตน/records) มันอ่านกลับเป็น <i>เนื้อหาส่วนตัว</i> ไม่ได้ — no-hair / Holevo / Gibbs / e^S decay.</li>
+  <li><b>ช่องเดียวที่ไม่เคยปิด.</b> ทุกอย่างสึกลงเป็นมุนดานหรือ [Hypo]/[CONTESTED] — เหลือ hard problem อันเดียวที่ [OPEN] จริง.</li>
+</ol></div>
+
+<h2>คัดแยกใหม่ตามชนิด — 5 Types (ตัดขวางกลุ่มหัวข้อ)</h2>
+<p class="gdesc">27 ปรากฏการณ์จัดใหม่ตาม <i>สถานะเชิงญาณ</i> ไม่ใช่ตามหัวข้อ — นี่คือโครงลึกที่แท้จริง:</p>
+<table class="matrix">
+<tr><th>Type</th><th>คืออะไร</th><th>ตัวอย่าง</th><th>แท็ก</th></tr>
+<tr><td class="mono">1</td><td>ประสบการณ์จริง กลไกวัดได้; ตีความ “เบื้องหลัง” ไม่มีหลักฐาน</td><td>OBE, ผีอำ, psychedelic, DMT, déjà vu, ghost, EVP, past-life regression, phantom limb</td><td>Fact</td></tr>
+<tr><td class="mono">2</td><td>Neuroscience established; ข้อมูลเป็นกลาง materialism vs filter</td><td>lesions, blindsight, anesthesia, savant, free will</td><td>ESTABLISHED</td></tr>
+<tr><td class="mono">3</td><td>วัดเหนือสุ่มได้จริง แต่ทำซ้ำอิสระไม่ได้</td><td>telepathy, RV, micro-PK, presentiment, precog, crisis apparitions, mediumship, divination</td><td>CONTESTED</td></tr>
+<tr><td class="mono">4</td><td>anecdote ย้อนหลัง; สลายเมื่อส่อง; ชนกำแพงฟิสิกส์</td><td>reincarnation, veridical NDE/OBE, xenoglossy</td><td>CONTESTED/Hypo</td></tr>
+<tr><td class="mono">5</td><td>ไม่ใช่ effect เชิงประจักษ์ให้ปิด</td><td>hard problem, terminal lucidity</td><td>OPEN</td></tr>
+</table>
+
+<h2>ความคล้าย vs ความต่าง</h2>
+<div class="sub-item"><div class="row1"><span class="name">◆ ความคล้าย — ทุกอันแชร์เหมือนกัน</span></div>
+  <p class="core">① รู้สึกมีความหมาย/จริงแรงเสมอ · ② อาศัยเครื่องจักรสมองชุดเดียว (pattern &amp; agency detection, base-rate neglect, confirmation, retrospective matching) · ③ การตีความล้ำหน้าข้อมูลเสมอ (กระโดดจาก “ประสบการณ์/สัญญาณ” → “เบื้องหลัง”) · ④ <b>ไม่มีอันไหนให้ positive ที่ robust + replicated + controlled พร้อมกันเลย</b></p></div>
+<div class="sub-item"><div class="row1"><span class="name">◇ ความต่าง — 5 แกนที่แยกกลุ่ม</span></div>
+  <p class="core">① ประสบการณ์อธิบายแล้วหรือยัง (1,2 ใช่ / 3,4 อ้างเรื่อง <i>ข้อมูล</i> ไม่ใช่แค่ประสบการณ์) · ② มีสัญญาณควบคุมไหม (3 มี-แต่ล้ม / 4 ไม่ retrospective) · ③ fraud (poltergeist, บาง mediumship = ใช่ / ส่วนใหญ่ = หลอกตัวเองซื่อๆ) · ④ ฟิสิกส์ห้ามกลไกไหม (4 → no-hair/Holevo/e^S; 3 → no-signalling; 1,2 ไม่ชน) · ⑤ เป็นคำถามเชิงประจักษ์ไหม (5 = ไม่)</p></div>
+
+<h2>A · Survival of self — ตัวตนรอด/ถ่ายโอนไหม</h2>
+<p class="gdesc">จุดร่วมกลุ่ม: หลักฐานดีสุดเป็น retrospective; กำแพงฟิสิกส์ห้ามการถ่ายโอน <i>เนื้อหาส่วนตัว</i>.</p>
+<div class="sub-item"><div class="row1"><span class="tag contested">CONTESTED</span><span class="name">A1 · Reincarnation / past-life</span></div>
+  <p class="core">Stevenson ~2,500 เคส (UVA); จดก่อนตรวจแค่ <b>33 (1.3%)</b>; birthmark 210 เคส / 49 มี autopsy; มัธยฐานห่างตาย-เกิด ~16 เดือน; จางที่อายุ ~7; Leininger เถียงกัน (Sudduth).</p>
+  <p class="wall"><b>Wall:</b> retrospective + same-family = leakage; trace ข้ามภพ = dead-log L4 (cut); e^S decay.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag hypo">Hypo</span><span class="name">A2 · NDE / veridical perception</span></div>
+  <p class="core">gamma surge ตอนตาย (Borjigin, PNAS 2013/2023) [Fact]; แต่ visual hidden-target <b>null ตลอด AWARE I/II/IIIa</b> (Parnia; Ross & Parnia 2025).</p>
+  <p class="wall"><b>Wall:</b> cardiac-arrest ≠ brain-death → self-nullifying.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag contested">CONTESTED</span><span class="name">A3 · Mediumship / after-death communication</span></div>
+  <p class="core">Beischel/Schwartz (Windbridge) รายงานความแม่นเหนือสุ่มภายใต้บาง control; แต่ชุดแรกคุม <b>cold reading</b> ไม่พอ, n เล็ก.</p>
+  <p class="wall"><b>Wall:</b> cold reading + sensory leakage คุมไม่ครบ; ทำซ้ำอิสระบาง.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag open">OPEN</span><span class="name">A4 · Terminal lucidity</span></div>
+  <p class="core">สมองเสื่อม/เสียหายกลับมาชัดก่อนตาย — ปรากฏการณ์ <i>จริง</i>มีรายงาน (Nahm & Greyson) แต่กลไกยังไม่รู้.</p>
+  <p class="wall"><b>Status:</b> frontier เปิด ไม่ใช่ถูกอธิบายแล้ว.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag contested">CONTESTED</span><span class="name">A5 · Xenoglossy — พูดภาษาที่ไม่เคยเรียน</span></div>
+  <p class="core">Stevenson แยก recitative (ท่องซ้ำ) vs responsive (โต้ตอบ); เคส Sharada/Uttara Huddar, Gretchen, Jensen.</p>
+  <p class="wall"><b>Wall:</b> นักภาษาศาสตร์ Thomason (U-Michigan) = “หลักฐานอ่อนเกิน”; recitative = cryptomnesia; responsive ไม่มีความคล่องเจ้าของภาษา (Sharada ถูกตัดสินว่าเรียนเป็นภาษาสอง).</p></div>
+<div class="sub-item"><div class="row1"><span class="tag contested">CONTESTED</span><span class="name">A6 · Crisis apparitions — รับรู้คนไกลตัวขณะเขาตาย</span></div>
+  <p class="core">SPR Census of Hallucinations 1894: สำรวจ 17,000 คน, 1,684 เห็นภาพหลอน, <b>30 เป็น “death-coincidence”</b> = คำนวณได้ <b>440× อัตราบังเอิญ</b> (Sidgwick → ทฤษฎี telepathic).</p>
+  <p class="wall"><b>Wall:</b> retrospective self-report ทั้งภาพหลอน <i>และ</i> เวลาตาย; base-rate + memory/exaggeration; ไม่มี prospective registration.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag hypo">Hypo</span><span class="name">A7 · Veridical NDE/OBE — เห็นจริงขณะสมองดับ</span></div>
+  <p class="core">เคสธง: Pam Reynolds (cardiac standstill; เห็นเลื่อยผ่าตัด “เหมือนแปรงไฟฟ้า”); “รองเท้าของ Maria” บนขอบตึก.</p>
+  <p class="wall"><b>Wall:</b> Reynolds — perceptions เกิดช่วง <i>ยังไม่</i> standstill = anesthesia awareness + ได้ยินจริง (Woerlee, ~1/2000 ops); Maria’s shoe ตรวจอิสระไม่ได้ + รายละเอียดพองเมื่อเล่าซ้ำ (Ebbern–Mulligan–Beyerstein). AWARE hidden-target ยัง null.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag fact">Fact (มุนดาน)</span><span class="name">A8 · Past-life regression (สะกดจิต)</span></div>
+  <p class="core">Bridey Murphy (Virginia Tighe 1952) — สอบพบ <b>cryptomnesia</b> (รู้จักหญิงชื่อ Bridie Murphy ตอนเด็ก); Jane Evans ฯลฯ พบข้อบกพร่องเมื่อผู้เชี่ยวชาญตรวจ.</p>
+  <p class="wall"><b>Wall:</b> สะกดจิต = confabulation + suggestion + fantasy-proneness; เนื้อหาตามคำชี้นำ (Spanos).</p></div>
+
+<h2>B · Anomalous cognition — ข้อมูลเข้า (psi/ESP)</h2>
+<p class="gdesc">จุดร่วมกลุ่ม: meta เหนือสุ่มเล็กน้อย, decline effect, replication ล้ม, present-inference confound.</p>
+<div class="sub-item"><div class="row1"><span class="tag contested">CONTESTED</span><span class="name">B1 · Telepathy / Ganzfeld</span></div>
+  <p class="core">Bem–Honorton 1994 = <b>32.2%</b> (106/329; สุ่ม 25%); Storm 2010 เหนือสุ่ม; <b>แต่</b> Milton–Wiseman 1999 (30 studies) = null 27.6%.</p>
+  <p class="wall"><b>Wall:</b> ทำซ้ำสะอาดไม่ได้ + ข้อโต้ methodology (Hyman).</p></div>
+<div class="sub-item"><div class="row1"><span class="tag hypo">Hypo</span><span class="name">B2 · Precognition / presentiment</span></div>
+  <p class="core">Bem 2011 (9 exp) + Bem–Tressoldi 2016 <b>meta 90 การทดลอง</b> (รายงานเหนือสุ่มรวม) — แต่ทำซ้ำอิสระ <b>ล้ม</b> (Ritchie–Wiseman–French 2012; Galak 2012) + Bayesian reanalysis (Wagenmakers) ลบล้าง.</p>
+  <p class="wall"><b>Wall:</b> retrospective ไม่มี timestamp = เสมอกับฝัน+hindsight; meta พองด้วย non-blind + optional stopping.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag contested">CONTESTED</span><span class="name">B3 · Remote viewing</span></div>
+  <p class="core">SRI (Targ–Puthoff); Stargate $20M. <b>1995 AIR review:</b> Utts (+5–15% เหนือสุ่ม) vs Hyman (ไม่ทำซ้ำอิสระ, premature) → CIA <b>ปิดโครงการ</b>, ไม่มี operational value.</p>
+  <p class="wall"><b>Wall:</b> ไม่ทำซ้ำอิสระ; sensory cue / judging bias.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag contested">CONTESTED</span><span class="name">B4 · Divination / astrology</span></div>
+  <p class="core">โหราศาสตร์ blind = ระดับเดาสุ่ม (Carlson, <b>Nature</b> 1985); ค่าที่วัดคือ hit − base rate.</p>
+  <p class="wall"><b>Wall:</b> “100% ทั้งปี” = falsify ไม่ได้; แม่นใกล้ = present-inference.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag contested">CONTESTED</span><span class="name">B5 · Presentiment / predictive anticipatory activity</span></div>
+  <p class="core">Mossbridge, Tressoldi & Utts 2012 meta (26 studies): สรีระ (skin conductance/หัวใจ/EEG) “ตอบก่อน” สิ่งเร้าสุ่ม 1–10 วิ; effect เล็ก.</p>
+  <p class="wall"><b>Wall:</b> studies ส่วนใหญ่ non-blind + expectation/order effects (Schwarzkopf); Wagenmakers 2012 ทำซ้ำ = null (ทิศตรงข้าม).</p></div>
+
+<h2>C · Mind on matter — ข้อมูลออก (PK)</h2>
+<p class="gdesc">จุดร่วมกลุ่ม: เอฟเฟกต์หายเมื่อควบคุม; effect size จิ๋ว; fraud; การทดลองที่คุมดีสุด = null.</p>
+<div class="sub-item"><div class="row1"><span class="tag contested">CONTESTED</span><span class="name">C1 · Micro-PK (RNG) — PEAR</span></div>
+  <p class="core">PEAR (Jahn/Dunne 1979–2007) หลายล้าน trial; effect ~<b>50.02%</b>; <b>3-lab consortium replication ล้ม</b>; Schmidt: 71 หนุน / 261 ล้ม; ปิด 2007; mainstream ปฏิเสธ.</p>
+  <p class="wall"><b>Wall:</b> effect เล็กจน Type-I error ครอง; ไม่ทำซ้ำ.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag fact">Fact (มุนดาน)</span><span class="name">C2 · Poltergeist / macro-PK / RSPK</span></div>
+  <p class="core">Roll (RSPK). Tina Resch (Columbus 1984) <b>ถูกจับได้ปาของเองบนวิดีโอ</b> (Randi; Nickell “poltergeist-faking syndrome”); Enfield เด็กยอมรับแกล้งบางส่วน; Resch lab test = <b>สุ่ม</b>.</p>
+  <p class="wall"><b>Wall:</b> fraud + misperception + normal causes; ไม่มีหลักฐานควบคุม.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag fact">Fact (null)</span><span class="name">C3 · Faith healing / intercessory prayer</span></div>
+  <p class="core"><b>STEP 2006</b> (Benson; n=<b>1,802</b>, double-blind, 6 รพ.) = <b>ไม่มีผล</b>; กลุ่มที่ <i>รู้</i>ว่าถูกสวดให้ กลับ complication สูงกว่า (59% vs 51–52%).</p>
+  <p class="wall"><b>Wall:</b> การทดลองที่ใหญ่/คุมดีสุด = null (หรือแย่ลง).</p></div>
+
+<h2>D · Anomalous experience — กลไกมุนดานอธิบายจบ</h2>
+<p class="gdesc">จุดร่วมกลุ่ม: กลไกวัดได้สร้าง <i>ประสบการณ์</i> เต็ม; การตีความ “เบื้องหลัง” ไม่มีหลักฐาน.</p>
+<div class="sub-item"><div class="row1"><span class="tag fact">Fact</span><span class="name">D1 · OBE — ประสบการณ์นอกร่าง</span></div>
+  <p class="core">เหนี่ยวนำด้วยไฟฟ้าที่ TPJ (Blanke, <b>Nature</b> 2002; Bos 2016; Penfield) — vestibular/multisensory ผิดเพี้ยน.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag fact">Fact</span><span class="name">D2 · Sleep paralysis / ผีอำ</span></div>
+  <p class="core">REM atonia รุกเข้าช่วงตื่น + hypnagogic hallucination (Cheyne; Hufford “Old Hag”); ข้ามวัฒนธรรมคล้ายเพราะสรีระเดียว.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag fact">Fact</span><span class="name">D3 · Psychedelic / mystical experience</span></div>
+  <p class="core">entropic brain + DMN แตกตัว (Carhart-Harris 2014); psilocybin desync (Siegel, <b>Nature</b> 2024).</p></div>
+<div class="sub-item"><div class="row1"><span class="tag fact">Fact</span><span class="name">D4 · Déjà vu</span></div>
+  <p class="core">familiarity misattribution (Cleary); constructive/false memory (Schacter; Loftus).</p></div>
+<div class="sub-item"><div class="row1"><span class="tag fact">Fact</span><span class="name">D5 · Ghost / haunting / EVP</span></div>
+  <p class="core">infrasound 18.9 Hz → เห็นเงา (Tandy & Lawrence 1998); CO poisoning; EMF → presence; pareidolia (EVP). Haunt Project (French 2009) = suggestion.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag fact">Fact</span><span class="name">D6 · DMT entity encounters</span></div>
+  <p class="core">Davis et al. 2020 (Johns Hopkins) n=<b>2,561</b>: <b>72%</b> เชื่อ entity “คงอยู่ต่อหลังพบ”, หลายคนรู้สึก “จริงกว่าความจริงปกติ” (Strassman, Spirit Molecule).</p>
+  <p class="wall"><b>ตีความ:</b> ประสบการณ์จริง + neuropharmacology อธิบายได้; “มิติจริงอิสระ” ไม่มีหลักฐาน — เหมือน OBE/mystical.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag fact">Fact</span><span class="name">D7 · EVP ใต้เงื่อนไข blind</span></div>
+  <p class="core">auditory pareidolia + priming: เล่นนอยส์ให้ 2 กลุ่ม บอก “บ้านผีสิง” vs “นอยส์เฉยๆ” → กลุ่มแรกได้ยินเสียง. Alcock: “ผลผลิตของความหวัง+ความคาดหวัง หายเมื่อส่องด้วยวิทยาศาสตร์”.</p>
+  <p class="wall"><b>Wall:</b> ไม่มีเสียงเฉพาะที่ทำซ้ำได้ตามสั่ง; ไม่ผ่าน blind listener test.</p></div>
+
+<h2>E · Brain ↔ mind — established แต่ตีความได้สองทาง</h2>
+<p class="gdesc">จุดร่วมกลุ่ม: กลไก [ESTABLISHED]; ข้อมูล <i>เป็นกลาง</i>ระหว่างวัตถุนิยม vs filter theory — ไม่ตัดสิน metaphysics.</p>
+<div class="sub-item"><div class="row1"><span class="tag fact">ESTABLISHED</span><span class="name">E1 · Brain lesion → บุคลิก/การรับรู้เพี้ยน</span></div>
+  <p class="core">Phineas Gage (frontal→บุคลิก, Harlow); Capgras; split-brain (Gazzaniga; Pinto 2017); neglect; aphasia.</p>
+  <p class="wall"><b>ตีความ:</b> “สมองผลิตจิต” vs “แปลผิดเฉพาะที่” (§4.7) — cuts both ways (§2.9).</p></div>
+<div class="sub-item"><div class="row1"><span class="tag fact">Fact</span><span class="name">E2 · Blindsight / covert consciousness</span></div>
+  <p class="core">ประมวลผลไร้ awareness (Weiskrantz 1986) + awareness ไร้พฤติกรรม (Owen 2006; Bodien, NEJM 2024) — ตัด “พฤติกรรม=สำนึก” สองทาง.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag fact">Fact</span><span class="name">E3 · Processing without awareness (anesthesia)</span></div>
+  <p class="core">ฮิปโปแคมปัสประมวลภาษาใต้ยาสลบ (Katlowitz…Hayden & Sheth, <b>Nature</b> 2026).</p></div>
+<div class="sub-item"><div class="row1"><span class="tag fact">Fact</span><span class="name">E4 · Savant / acquired genius</span></div>
+  <p class="core">disinhibition ภายใน — Snyder เหนี่ยวนำด้วย tDCS/TMS โดย <i>กด</i>สมอง (Treffert; Kapur 1996) — ไม่ใช่ช่องนอก.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag fact">Fact</span><span class="name">E5 · Phantom limb / body schema</span></div>
+  <p class="core">cortical remapping (Ramachandran); mirror-box บรรเทา — body schema เป็น construct ของสมอง.</p></div>
+<div class="sub-item"><div class="row1"><span class="tag contested">CONTESTED</span><span class="name">E6 · Free will / agency</span></div>
+  <p class="core">การตัดสินใจก่อนรู้ตัว (Libet 1983); determinism (Sapolsky) vs libertarian — R = distributed competition, ไม่มี central decider (§9.3.1).</p></div>
+
+<h2>F · The irreducibly open</h2>
+<p class="gdesc">จุดร่วมกลุ่ม: ช่องเดียวที่รอดจากการสึกกร่อน.</p>
+<div class="sub-item"><div class="row1"><span class="tag open">OPEN</span><span class="name">F1 · Hard problem — ทำไมมี “ความรู้สึก” เลย</span></div>
+  <p class="core">ไม่มีคำตอบ, ไม่มีการทดลองใดพร้อมปิด (Chalmers 1995) = keystone §6.7 ของ CoE.</p>
+  <p class="wall"><b>Status:</b> frontier แท้ — ไม่ใช่ effect เชิงประจักษ์ให้ replicate.</p></div>
+
+<h2>สรุปเมทริกซ์ — ตำแหน่งบนแกน “ยิ่งคุม ยิ่งหด”</h2>
+<table class="matrix">
+<tr><th>กลุ่ม</th><th>มีสัญญาณควบคุม?</th><th>รอด replication?</th><th>แท็ก</th></tr>
+<tr><td>Telepathy / RV / micro-PK</td><td class="mono">มี (เล็ก)</td><td class="mono">ไม่</td><td>CONTESTED</td></tr>
+<tr><td>Reincarnation / mediumship</td><td class="mono">retrospective</td><td class="mono">prospective อ่อน</td><td>CONTESTED</td></tr>
+<tr><td>Precog / NDE</td><td class="mono">null</td><td class="mono">—</td><td>Hypo</td></tr>
+<tr><td>Poltergeist / prayer / hauntings</td><td class="mono">null / fraud</td><td class="mono">—</td><td>Fact (มุนดาน)</td></tr>
+<tr><td>OBE / sleep-paralysis / lesions / savant …</td><td class="mono">กลไกวัดได้</td><td class="mono">ใช่</td><td>Fact/ESTABLISHED</td></tr>
+<tr><td>Hard problem</td><td class="mono">ไม่ใช่ effect</td><td class="mono">n/a</td><td>OPEN</td></tr>
+</table>
+
+<footer>
+Core-evidence sources: Stevenson/Tucker/Sudduth · Parnia (AWARE) · Bem–Honorton 1994 / Milton–Wiseman 1999 / Storm 2010 · Bem 2011 / Ritchie 2012 · AIR 1995 (Utts/Hyman) · Carlson 1985 (Nature) · PEAR (Jahn–Dunne) / Schmidt · Roll / Nickell / Randi (Resch) · Benson STEP 2006 · Blanke 2002 · Cheyne/Hufford · Carhart-Harris 2014 / Siegel 2024 · Cleary/Schacter/Loftus · Tandy 1998 / French 2009 · Harlow/Gazzaniga/Pinto · Weiskrantz/Owen/Bodien · Katlowitz…Sheth 2026 · Snyder/Kapur · Ramachandran · Libet 1983 · Chalmers 1995. — จัดกลุ่ม + สกัดจุดร่วม, ไม่เข้าเอกสาร CoE (§6.6).
+</footer>
+</div>
+</body>
+</html>
