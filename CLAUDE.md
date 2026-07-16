@@ -12,13 +12,13 @@ The author is Pitarn Rungsiyapornratana. The work is archived on Zenodo (concept
 
 `Consciousness_for_Eternity.md` (~1340 lines) is the **canonical document**. Everything else is derived from it or describes it:
 
-- `Consciousness_for_Eternity_v2.31.pdf` — a generated reading view (named with the current version; the prior-version PDF is deleted on each bump). It is committed at the repo root (the `.gitignore` `/rendered/` rule and commented-out `*.pdf` rule anticipate a future move to a generated-only workflow, but the current PDF is tracked and named with its version).
+- `Consciousness_for_Eternity_v2.32.pdf` — a generated reading view (named with the current version; the prior-version PDF is deleted on each bump). It is committed at the repo root (the `.gitignore` `/rendered/` rule and commented-out `*.pdf` rule anticipate a future move to a generated-only workflow, but the current PDF is tracked and named with its version).
 - `README.md`, `CITATION.cff`, `.zenodo.json` — metadata *about* the document (title, version, DOI, keywords, license).
 - `CONNECTION_MAP.md` — a cross-document index tying CoE to three sibling frameworks (see below).
 
 When the `.md` and any of these disagree, **the `.md` is authoritative** and the others must be corrected to match.
 
-**Reference the latest version only.** When you need to consult the work during a task, read the *current* files: the canonical `Consciousness_for_Eternity.md` (its top line names the current version — currently V2.31) and, if a rendered view is needed, the matching `Consciousness_for_Eternity_vX.pdf`, plus the current `research-appendix/` files. Do **not** re-read superseded artifacts to rebuild context — prior-version PDFs, scratchpad drafts and intermediate build outputs (`scratchpad/coe*.pdf`, `*_b.pdf`, `test*.pdf`, etc.), or earlier git revisions — **unless explicitly told to** (e.g. "compare against V2.23", "read the old PDF"). The `.md` is the single source of truth; consulting older external copies wastes effort and risks acting on stale text. (This is a default, not a hard block — an explicit request always overrides it.)
+**Reference the latest version only.** When you need to consult the work during a task, read the *current* files: the canonical `Consciousness_for_Eternity.md` (its top line names the current version — currently V2.32) and, if a rendered view is needed, the matching `Consciousness_for_Eternity_vX.pdf`, plus the current `research-appendix/` files. Do **not** re-read superseded artifacts to rebuild context — prior-version PDFs, scratchpad drafts and intermediate build outputs (`scratchpad/coe*.pdf`, `*_b.pdf`, `test*.pdf`, etc.), or earlier git revisions — **unless explicitly told to** (e.g. "compare against V2.23", "read the old PDF"). The `.md` is the single source of truth; consulting older external copies wastes effort and risks acting on stale text. (This is a default, not a hard block — an explicit request always overrides it.)
 
 > Note: `gitignore` (no dot) at the repo root is a byte-identical duplicate of `.gitignore`. It is inert (git only honors `.gitignore`). Leave it unless asked to clean it up.
 
@@ -74,7 +74,7 @@ Section numbering is sequential and gap-free, and every `§N.M` cross-reference 
 
 ## Versioning — what to update on a release
 
-Version tags are **not monotonic by history** (the scheme restarted once: true order is V1 → V2 → V3 → V1.4 → … → V2.23). The **canonical version is the top line of the `.md`** (currently V2.31); future revisions continue monotonically from there (next = V2.32). The leading digit is held at `2` so point-releases never collide with the legacy coarse `V3` content-generation tag.
+Version tags are **not monotonic by history** (the scheme restarted once: true order is V1 → V2 → V3 → V1.4 → … → V2.23). The **canonical version is the top line of the `.md`** (currently V2.32); future revisions continue monotonically from there (next = V2.33). The leading digit is held at `2` so point-releases never collide with the legacy coarse `V3` content-generation tag.
 
 When bumping the version, update **all of these together** so they never disagree:
 
